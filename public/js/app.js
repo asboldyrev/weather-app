@@ -17447,6 +17447,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var updateInterval = 10 * 60 * 1000;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'App',
   components: {
@@ -17482,7 +17483,6 @@ __webpack_require__.r(__webpack_exports__);
     updateData: function updateData() {
       var _this = this;
 
-      console.log('data updating');
       (0,_sdk__WEBPACK_IMPORTED_MODULE_3__.weather)({
         lat: this.place.lat,
         lon: this.place.lon,
@@ -17510,7 +17510,8 @@ __webpack_require__.r(__webpack_exports__);
     var width = document.documentElement.clientWidth,
         height = document.documentElement.clientHeight;
     this.isMobile = width < 1000 && width < height;
-    this.updateData(); //setInterval(this.updateData, 0.1 * 60 * 1000);
+    this.updateData();
+    setInterval(this.updateData, updateInterval);
   }
 });
 

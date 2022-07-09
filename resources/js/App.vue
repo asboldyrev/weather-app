@@ -28,6 +28,8 @@
     import relativeTime from 'dayjs/plugin/relativeTime'
     import dayjs from 'dayjs'
 
+    const updateInterval = 10 * 60 * 1000;
+
     export default {
     name: 'App',
     components: {
@@ -61,7 +63,6 @@
     },
     methods: {
         updateData() {
-            console.log('data updating');
             weather({
                 lat: this.place.lat,
                 lon: this.place.lon,
@@ -94,7 +95,7 @@
         this.isMobile = width < 1000 && width < height;
 
         this.updateData();
-        //setInterval(this.updateData, 0.1 * 60 * 1000);
+        setInterval(this.updateData, updateInterval);
     }
 }
 </script>
