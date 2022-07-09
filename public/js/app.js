@@ -18608,8 +18608,8 @@ var _hoisted_3 = {
   "class": "float-start",
   style: {
     "height": "39px",
-    "margin-top": "4px",
-    "margin-bottom": "-4px"
+    "margin-top": "7px",
+    "margin-bottom": "-7px"
   }
 };
 var _hoisted_4 = {

@@ -2,7 +2,7 @@
     <div class="card mb-3">
         <div class="card-header position-relative" @click="opened = !opened">
             <div class="clearfix">
-                <div class="float-start" style="height: 39px; margin-top: 4px; margin-bottom: -4px;">{{ date }}</div>
+                <div class="float-start" style="height: 39px; margin-top: 7px; margin-bottom: -7проpx;">{{ date }}</div>
                 <div class="float-end">{{ temperature('max') }} / {{ temperature('min') }} °C <img class="d-inline" :src="iconUrl"></div>
             </div>
         </div>
