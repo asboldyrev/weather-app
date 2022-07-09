@@ -63,6 +63,9 @@ class OneWeather
             'icon' => self::getMoonIconName($weatherData->moon_phase),
         ];
 
+        $result['pop'] = round($weatherData->pop * 100);
+        $result['rain'] = $weatherData->rain ?? 0;
+
         $result['temperature']['temp'] = (array)$weatherData->temp;
         $result['temperature']['feelsLike'] = (array)$weatherData->feels_like;
 
