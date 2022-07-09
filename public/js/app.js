@@ -17690,6 +17690,10 @@ __webpack_require__.r(__webpack_exports__);
     extend: {
       type: Boolean,
       required: false
+    },
+    offline: {
+      type: Boolean,
+      "default": false
     }
   },
   components: {
@@ -17701,7 +17705,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this$weather;
 
       if ((_this$weather = this.weather) !== null && _this$weather !== void 0 && _this$weather.timestamp) {
-        return dayjs__WEBPACK_IMPORTED_MODULE_2___default().unix(this.weather.timestamp).format('dddd, DD MMMM');
+        return dayjs__WEBPACK_IMPORTED_MODULE_2___default().unix(this.weather.timestamp).format('dd, DD MMMM');
       }
     },
     time: function time() {
@@ -17886,7 +17890,8 @@ __webpack_require__.r(__webpack_exports__);
     weather: Object,
     alerts: Object,
     place: Object,
-    extend: Boolean
+    extend: Boolean,
+    offline: Boolean
   },
   components: {
     CurrentWeather: _CurrentWeatherCompoment_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -18012,10 +18017,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     weather: $data.weather.current,
     alerts: $data.weather.alerts,
     place: $data.place,
+    offline: $data.isOffline,
     extend: ""
   }, null, 8
   /* PROPS */
-  , ["weather", "alerts", "place"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hourly_weather, {
+  , ["weather", "alerts", "place", "offline"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hourly_weather, {
     hourly: $data.weather.hourly,
     extend: ""
   }, null, 8
@@ -18461,49 +18467,75 @@ var _hoisted_1 = {
   "class": "card bg-day text-white current"
 };
 var _hoisted_2 = {
-  "class": "card-body"
+  "class": "card-body position-relative"
 };
 var _hoisted_3 = {
-  "class": "row h-100"
+  "class": "alert_offline position-absolute m-2"
 };
-var _hoisted_4 = {
-  "class": "col-6 h-100"
-};
-var _hoisted_5 = {
-  "class": "row"
-};
-var _hoisted_6 = {
-  "class": "col-6"
-};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Нет соединеня с сервером ");
+
+var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    "class": "alert_offline_icon",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor",
+    "stroke-width": "2"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+    stroke: "#ffffff",
+    fill: "#eb1a1a",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    d: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+  })], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_6 = [_hoisted_4, _hoisted_5];
 var _hoisted_7 = {
-  "class": "col-6 text-end"
+  "class": "row h-100"
 };
 var _hoisted_8 = {
-  "class": "row h-100"
+  "class": "col-6 h-100"
 };
 var _hoisted_9 = {
-  "class": "col-12 position-relative"
+  "class": "row"
 };
 var _hoisted_10 = {
-  "class": "temperature"
-};
-var _hoisted_11 = {
-  "class": "temperature_description"
-};
-var _hoisted_12 = {
   "class": "col-6"
 };
-var _hoisted_13 = {
-  "class": "icon"
+var _hoisted_11 = {
+  "class": "col-6 text-end"
 };
-var _hoisted_14 = ["src"];
+var _hoisted_12 = {
+  "class": "row h-100"
+};
+var _hoisted_13 = {
+  "class": "col-12 position-relative"
+};
+var _hoisted_14 = {
+  "class": "temperature"
+};
 var _hoisted_15 = {
-  "class": "row"
+  "class": "temperature_description"
 };
 var _hoisted_16 = {
   "class": "col-6"
 };
 var _hoisted_17 = {
+  "class": "icon"
+};
+var _hoisted_18 = ["src"];
+var _hoisted_19 = {
+  "class": "row"
+};
+var _hoisted_20 = {
+  "class": "col-6"
+};
+var _hoisted_21 = {
   "class": "col-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -18513,27 +18545,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_air_quality = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("air-quality");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.place.locality), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, _hoisted_6, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $props.offline]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.place.locality), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.place.country), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.time), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.time), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.date), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.temperature) + " °", 1
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.temperature) + " °", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.weather.description), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.weather.description), 1
   /* TEXT */
-  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $options.iconUrl
   }, null, 8
   /* PROPS */
-  , _hoisted_14)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_alerts, {
+  , _hoisted_18)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_alerts, {
     alerts: $props.alerts
   }, null, 8
   /* PROPS */
-  , ["alerts"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_air_quality, {
+  , ["alerts"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_air_quality, {
     "class": "mt-3 text-end",
     pollution: (_$props$weather = $props.weather) === null || _$props$weather === void 0 ? void 0 : _$props$weather.airPollution
   }, null, 8
@@ -18774,10 +18808,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     weather: $props.weather,
     alerts: $props.alerts,
     place: $props.place,
+    offline: $props.offline,
     extend: $props.extend
   }, null, 8
   /* PROPS */
-  , ["weather", "alerts", "place", "extend"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_additional_information, {
+  , ["weather", "alerts", "place", "offline", "extend"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_additional_information, {
     title: "Ветер",
     description: $options.windDescription,
     content: ((_$props$weather$wind = $props.weather.wind) === null || _$props$weather$wind === void 0 ? void 0 : _$props$weather$wind.speed) + ' м/с',
@@ -18965,7 +19000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".current[data-v-7e921888] {\n  background-color: #1c6cae !important;\n}\n.current .icon[data-v-7e921888] {\n  overflow: hidden;\n}\n.current .icon img[data-v-7e921888] {\n  width: 20vw;\n}\n.current .temperature[data-v-7e921888] {\n  font-size: 10vw;\n  transform: translate(2vw, 0vw);\n}\n.current .temperature_description[data-v-7e921888] {\n  text-align: center;\n  transform: translate(0, -1vw);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".current[data-v-7e921888] {\n  background-color: #1c6cae !important;\n}\n.current .alert_offline[data-v-7e921888] {\n  top: 0;\n  right: 0;\n}\n.current .alert_offline_icon[data-v-7e921888] {\n  width: 25px;\n}\n.current .icon[data-v-7e921888] {\n  overflow: hidden;\n}\n.current .icon img[data-v-7e921888] {\n  width: 20vw;\n}\n.current .temperature[data-v-7e921888] {\n  font-size: 10vw;\n  transform: translate(2vw, 0vw);\n}\n.current .temperature_description[data-v-7e921888] {\n  text-align: center;\n  transform: translate(0, -1vw);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

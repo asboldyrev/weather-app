@@ -2,7 +2,7 @@
     <div class="m-3">
         <div class="row g-3">
             <div class="col-md-12">
-                <current-weather :weather="weather" :alerts="alerts" :place="place" :extend="extend"></current-weather>
+                <current-weather :weather="weather" :alerts="alerts" :place="place" :offline="offline" :extend="extend"></current-weather>
             </div>
             <div class="col-md-6">
                 <additional-information
@@ -51,6 +51,7 @@
             alerts: Object,
             place: Object,
             extend: Boolean,
+            offline: Boolean
         },
         components: {
             CurrentWeather,

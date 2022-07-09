@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="m-3">
-                    <today-weather :weather="weather.current" :alerts="weather.alerts" :place="place" extend></today-weather>
+                    <today-weather :weather="weather.current" :alerts="weather.alerts" :place="place" :offline="isOffline" extend></today-weather>
                 </div>
 
                 <div class="m-3">
