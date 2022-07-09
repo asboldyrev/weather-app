@@ -128,10 +128,7 @@ export default {
 
 <style lang="scss" scoped>
     .block {
-        //background: #ccc;
-
         &_indicator {
-            //margin-left: 10px;
             margin-right: 10px;
             display: inline-block;
             width: 10px;

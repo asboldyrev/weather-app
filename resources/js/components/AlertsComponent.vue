@@ -25,7 +25,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {{ alerts[0].event }}<span v-if="alerts.length > 1"> +{{ alerts.length - 1 }}</span>
-            <!--<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ alerts.length }}</span>-->
         </button>
     </div>
 </template>
