@@ -28,7 +28,7 @@
     import relativeTime from 'dayjs/plugin/relativeTime'
     import dayjs from 'dayjs'
 
-    const updateInterval = 10 * 60 * 1000;
+    const updateInterval = 5 * 60 * 1000;
 
     export default {
     name: 'App',

@@ -17447,7 +17447,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var updateInterval = 10 * 60 * 1000;
+var updateInterval = 5 * 60 * 1000;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'App',
   components: {
@@ -18609,7 +18609,7 @@ var _hoisted_3 = {
   style: {
     "height": "39px",
     "margin-top": "7px",
-    "margin-bottom": "-7px"
+    "margin-bottom": "-7проpx"
   }
 };
 var _hoisted_4 = {
