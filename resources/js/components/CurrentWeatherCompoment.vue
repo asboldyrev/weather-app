@@ -21,7 +21,7 @@
                     </div>
                     <div class="row h-100">
                         <div class="col-12 position-relative">
-                            <h1 class="temperature">{{ temperature }} °</h1>
+                            <h1 class="temperature">{{ temperature }}°</h1>
                             <p class="temperature_description">{{ weather.description }}</p>
                         </div>
                     </div>
