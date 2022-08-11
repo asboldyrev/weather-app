@@ -1,11 +1,11 @@
 <template>
     <div>
-        AQI: {{ pollution?.aqi }}
+        AQI: {{ store.weather.current.airPollution?.aqi }}
         <div class="d-inline position-relative">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="heroicon_information-circle"
-                :class="getColor('aqi')"
+                :class="getAqiColor()"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -25,27 +25,27 @@
                 <div class="popover-body">
                     <div>
                         <span class="block_indicator" :class="getColor('co')"></span>
-                        <strong>CO</strong>: <span class="block text-muted">{{ pollution?.components?.co }} мкг/м<sup>3</sup></span>
+                        <strong>CO</strong>: <span class="block text-muted">{{ store.weather.current.airPollution?.components?.co.value }} мкг/м<sup>3</sup></span>
                     </div>
                     <div>
                         <span class="block_indicator" :class="getColor('no2')"></span>
-                        <strong>NO<sub>2</sub></strong>: <span class="block text-muted">{{ pollution?.components?.no2 }} мкг/м<sup>3</sup></span>
+                        <strong>NO<sub>2</sub></strong>: <span class="block text-muted">{{ store.weather.current.airPollution?.components?.no2.value }} мкг/м<sup>3</sup></span>
                     </div>
                     <div>
                         <span class="block_indicator" :class="getColor('o3')"></span>
-                        <strong>O<sub>3</sub></strong>: <span class="block text-muted">{{ pollution?.components?.o3 }} мкг/м<sup>3</sup></span>
+                        <strong>O<sub>3</sub></strong>: <span class="block text-muted">{{ store.weather.current.airPollution?.components?.o3.value }} мкг/м<sup>3</sup></span>
                     </div>
                     <div>
                         <span class="block_indicator" :class="getColor('so2')"></span>
-                        <strong>SO<sub>2</sub></strong>: <span class="block text-muted">{{ pollution?.components?.so2 }} мкг/м<sup>3</sup></span>
+                        <strong>SO<sub>2</sub></strong>: <span class="block text-muted">{{ store.weather.current.airPollution?.components?.so2.value }} мкг/м<sup>3</sup></span>
                     </div>
                     <div>
                         <span class="block_indicator" :class="getColor('pm2_5')"></span>
-                        <strong>PM 2.5</strong>: <span class="block text-muted">{{ pollution?.components?.pm2_5 }} мкг/м<sup>3</sup></span>
+                        <strong>PM 2.5</strong>: <span class="block text-muted">{{ store.weather.current.airPollution?.components?.pm2_5.value }} мкг/м<sup>3</sup></span>
                     </div>
                     <div>
                         <span class="block_indicator" :class="getColor('pm10')"></span>
-                        <strong>PM 10</strong>: <span class="block text-muted">{{ pollution?.components?.pm10 }} мкг/м<sup>3</sup></span>
+                        <strong>PM 10</strong>: <span class="block text-muted">{{ store.weather.current.airPollution?.components?.pm10.value }} мкг/м<sup>3</sup></span>
                     </div>
                 </div>
             </div>
@@ -54,76 +54,43 @@
 </template>
 
 <script>
-export default {
-    props: {
-        pollution: Object
-    },
-    data() {
-        return {
-            showPopover: false,
-            colors: {
-                co: [
-                    [0, 5000], [5000, 7500], [7500, 10000], [10000, 20000], [20000]
-                ],
-                no2: [
-                    [0,50], [50,100], [100,200], [200,400], [400]
-                ],
-                o3: [
-                    [0,60], [60,120], [120,180], [180,240], [240]
-                ],
-                so2: [
-                    [0,50], [50, 100], [100, 350], [350, 500], [500]
-                ],
-                pm2_5: [
-                    [0,15], [15,30], [30,55], [55,110], [110]
-                ],
-                pm10: [
-                    [0,25], [25,50], [50,90], [90,180], [180]
-                ],
-                aqi: [
-                    [1,2], [2,3], [3,4], [4,5], [5,6]
-                ],
+    import { useStore } from '../store'
+    export default {
+        setup() {
+            const store = useStore()
+
+            return { store }
+        },
+        data() {
+            return {
+                showPopover: false,
             }
-        }
-    },
-    methods: {
+        },
+        methods: {
+                getAqiColor() {
+                    const classes = [
+                        'very_low-aqi',
+                        'low-aqi',
+                        'medium-aqi',
+                        'high-aqi',
+                        'very_high-aqi',
+                    ];
 
-            getColor(name) {
-                let value = this.pollution?.components[name];
+                    return classes[this.store.weather.current.airPollution?.aqi - 1];
+                },
+                getColor(name) {
+                    const classes = [
+                        'very_low',
+                        'low',
+                        'medium',
+                        'high',
+                        'very_high',
+                    ];
 
-                if(name == 'aqi') {
-                    value = this.pollution?.aqi;
-
-                    return {
-                        'very_low-aqi': this.getBoolean(this.colors[name][0], value),
-                        'low-aqi': this.getBoolean(this.colors[name][1], value),
-                        'medium-aqi': this.getBoolean(this.colors[name][2], value),
-                        'high-aqi': this.getBoolean(this.colors[name][3], value),
-                        'very_high-aqi': this.getBoolean(this.colors[name][4], value),
-                    };
+                    return classes[this.store.weather.current.airPollution?.components[name]?.index - 1] || '';
                 }
-
-                return {
-					'very_low': this.getBoolean(this.colors[name][0], value),
-					'low': this.getBoolean(this.colors[name][1], value),
-					'medium': this.getBoolean(this.colors[name][2], value),
-					'high': this.getBoolean(this.colors[name][3], value),
-					'very_high': this.getBoolean(this.colors[name][4], value),
-				};
-            },
-            getBoolean(range, value) {
-                if(range.length == 1) {
-					return value > range[0];
-				}
-
-				if(range.length == 2) {
-					return value >= range[0] && value < range[1];
-				}
-
-				return false;
-            }
+        }
     }
-}
 </script>
 
 <style lang="scss" scoped>

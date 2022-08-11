@@ -1,5 +1,5 @@
 <template>
-    <div v-if="alerts.length">
+    <div v-if="store.weather.alerts.length">
         <div class="modal modal-alerts" :class="{ 'd-block': openedModal }" tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
@@ -9,7 +9,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="mt-4">
-                            <div v-for="(alert, index) in alerts" :key="index">
+                            <div v-for="(alert, index) in store.weather.alerts" :key="index">
                                 <h4 class="mt-4 mb-0">{{ alert.event }}</h4>
                                 <small class="text-muted">{{ getAlertDate(alert.start) }} — {{ getAlertDate(alert.end) }}</small>
                                 <p class="mt-2" v-if="alert.description">{{ alert.description }}</p>
@@ -24,17 +24,19 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="heroicon_exclamation-circle" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {{ alerts[0].event }}<span v-if="alerts.length > 1"> +{{ alerts.length - 1 }}</span>
+            {{ store.weather.alerts[0].event }}<span v-if="store.weather.alerts.length > 1"> +{{ store.weather.alerts.length - 1 }}</span>
         </button>
     </div>
 </template>
 
 <script>
-    import dayjs from 'dayjs'
+    import { useStore } from '../store'
 
     export default {
-        props: {
-            alerts: Object
+        setup() {
+            const store = useStore()
+
+            return { store }
         },
         data() {
             return {
@@ -44,7 +46,7 @@
         methods: {
             getAlertDate(timestamp) {
                 if(timestamp) {
-                    return dayjs.unix(timestamp).format('DD.MM HH:mm')
+                    return this.$dayjs.unix(timestamp).format('DD.MM HH:mm')
                 }
             },
         }

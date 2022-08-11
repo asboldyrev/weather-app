@@ -15,14 +15,38 @@ class OneWeather
         $result['airPollution'] = [
             'aqi' => $airPollution->main->aqi,
             'components' => [
-                'co' => $airPollution->components->co,
-                'no' => $airPollution->components->no,
-                'no2' => $airPollution->components->no2,
-                'o3' => $airPollution->components->o3,
-                'so2' => $airPollution->components->so2,
-                'pm2_5' => $airPollution->components->pm2_5,
-                'pm10' => $airPollution->components->pm10,
-                'nh3' => $airPollution->components->nh3
+                'co' => [
+                    'value' => $airPollution->components->co,
+                    'index' => AirPollution::getIndex('co', $airPollution->components->co)
+                ],
+                'no' => [
+                    'value' => $airPollution->components->no,
+                    'index' => AirPollution::getIndex('no', $airPollution->components->no)
+                ],
+                'no2' => [
+                    'value' => $airPollution->components->no2,
+                    'index' => AirPollution::getIndex('no2', $airPollution->components->no2)
+                ],
+                'o3' => [
+                    'value' => $airPollution->components->o3,
+                    'index' => AirPollution::getIndex('o3', $airPollution->components->o3)
+                ],
+                'so2' => [
+                    'value' => $airPollution->components->so2,
+                    'index' => AirPollution::getIndex('so2', $airPollution->components->so2)
+                ],
+                'pm2_5' => [
+                    'value' => $airPollution->components->pm2_5,
+                    'index' => AirPollution::getIndex('pm2_5', $airPollution->components->pm2_5)
+                ],
+                'pm10' => [
+                    'value' => $airPollution->components->pm10,
+                    'index' => AirPollution::getIndex('pm10', $airPollution->components->pm10)
+                ],
+                'nh3' => [
+                    'value' => $airPollution->components->nh3,
+                    'index' => AirPollution::getIndex('nh3', $airPollution->components->nh3)
+                ]
             ],
             'dt' => $airPollution->dt
         ];
@@ -45,6 +69,14 @@ class OneWeather
         $result['visibility'] = $weatherData->visibility;
         $result['pop'] = $weatherData->pop;
         $result['isDay'] = mb_stripos($weatherData->weather[0]->icon, 'd') !== false;
+
+        if($weatherData->rain ?? false) {
+            $result['rain'] = $weatherData->rain->{'1h'};
+        }
+
+        if($weatherData->snow ?? false) {
+            $result['snow'] = $weatherData->snow->{'1h'};
+        }
 
         return $result;
     }

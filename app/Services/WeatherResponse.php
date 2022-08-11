@@ -43,14 +43,16 @@ class WeatherResponse
 
 
     protected static function filterAlerts(array $alerts = null) {
-        if(!is_array($alerts)) {
-            return [];
-        }
+        //if(!is_array($alerts)) {
+        //    return [];
+        //}
 
-        return array_values(
-            array_filter($alerts, function($alert) {
-                return preg_match('/[a-zA-Z]/', $alert->event) == false;
-            })
-        );
+        //return array_values(
+        //    array_filter($alerts, function($alert) {
+        //        return preg_match('/[a-zA-Z]/', $alert->event) == false;
+        //    })
+        //);
+
+        return $alerts;
     }
 }
