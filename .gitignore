@@ -7,3 +7,5 @@ Homestead.yaml
 /node_modules
 yarn-error.log
 /tmp
+/logs
+/db
