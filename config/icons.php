@@ -331,7 +331,7 @@ return [
 		'day' => 'cloudy', // 03d
 		'night' => 'cloudy', // 03n
     ],
-	803 => [
+	3 => [
         'main' => 'Clouds',
 		'description' => 'broken clouds: 51-84%',
 		'day' => 'overcast-day', // 04d
