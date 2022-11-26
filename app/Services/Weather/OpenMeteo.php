@@ -57,13 +57,26 @@ class OpenMeteo implements Arrayable
 
 	protected function parsePollution(stdClass $pollutions, stdClass $units): array {
 		$result = [];
+		$replace_names = [
+			'co' => 'carbon_monoxide',
+			'no2' => 'nitrogen_dioxide',
+			'so2' => 'sulphur_dioxide',
+			'o3' => 'ozone',
+		];
 
 		foreach($pollutions as $name => $pollution) {
 			if($name == 'time' || is_null($pollution[0])) {
 				continue;
 			}
 
-			$result[] = Pollution::create($name, $pollution[0], $units->{$name});
+			$_name = mb_strtolower($name);
+
+			$short_name = array_search($_name, $replace_names);
+			if ($short_name) {
+				$_name = $short_name;
+			}
+
+			$result[] = Pollution::create($_name, $pollution[0], $units->{$name});
 		}
 
 		return $result;

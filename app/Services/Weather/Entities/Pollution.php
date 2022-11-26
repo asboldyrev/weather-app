@@ -3,7 +3,6 @@
 namespace App\Services\Weather\Entities;
 
 use Illuminate\Contracts\Support\Arrayable;
-use JsonSerializable;
 
 class Pollution implements Arrayable
 {
@@ -76,19 +75,6 @@ class Pollution implements Arrayable
 
 
 	protected function getIndex(string $name, float $value) {
-		$name = mb_strtolower($name);
-		$names = [
-			'co' => 'carbon_monoxide',
-			'no2' => 'nitrogen_dioxide',
-			'so2' => 'sulphur_dioxide',
-			'o3' => 'ozone',
-		];
-
-		$short_name = array_search($name, $names);
-		if($short_name) {
-			$name = $short_name;
-		}
-
 		$ranges = $this->ranges[$name] ?? [];
 
 		foreach ($ranges as $index => $range) {
