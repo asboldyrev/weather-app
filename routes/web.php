@@ -14,8 +14,14 @@
 */
 
 $router->get('/', function () use ($router) {
-    return view('index');
+	return view('index');
 });
+
+if(env('APP_ENV') != 'production') {
+	$router->get('test-icons', function () use ($router) {
+		return view('test-icons');
+	});
+}
 
 $router->get('offline', function () use ($router) {
     return response()->json(['error' => 'offline']);
