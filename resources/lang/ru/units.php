@@ -3,10 +3,12 @@
 return [
 	'metric' => [
 		'speed' => 'м/с',
-		'temperature' => '°C'
+		'temperature' => '°C',
+		'length' => 'м',
 	],
 	'imperial' => [
 		'speed' => 'миль/ч',
-		'temperature' => 'F'
+		'temperature' => 'F',
+		'length' => 'дюйм',
 	],
 ];
