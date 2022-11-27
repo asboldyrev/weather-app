@@ -66,9 +66,9 @@ class Weather implements Arrayable
 		Wind $wind,
 		Icon $icon,
 		Time $time,
-		float $clouds = null,
-		float $visibility = null,
-		Precipitation $precipitation = null
+		?float $clouds,
+		?float $visibility,
+		?Precipitation $precipitation
 	): self {
 		$weather = new self($minTemperature, $maxTemperature, $pressure, $humidity, $wind, $icon, $time, $clouds, $visibility, $precipitation);
 
@@ -100,9 +100,9 @@ class Weather implements Arrayable
 		Wind $wind,
 		Icon $icon,
 		Time $time,
-		float $clouds = null,
-		float $visibility = null,
-		Precipitation $precipitation = null
+		?float $clouds,
+		?float $visibility,
+		?Precipitation $precipitation
 	) {
 		$this->minTemperature = $minTemperature;
 		$this->maxTemperature = $maxTemperature;

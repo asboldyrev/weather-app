@@ -22,7 +22,7 @@ class Precipitation implements Arrayable
 	protected $shower;
 
 
-	public static function create(Rain $rain = null, Snow $snow = null, Shower $shower = null): self {
+	public static function create(?Rain $rain, ?Snow $snow, ?Shower $shower): self {
 		return new self($rain, $snow, $shower);
 	}
 
@@ -36,7 +36,7 @@ class Precipitation implements Arrayable
 	}
 
 
-	protected function __construct(Rain $rain = null, Snow $snow = null, Shower $shower = null) {
+	protected function __construct(?Rain $rain, ?Snow $snow, ?Shower $shower) {
 		if (!is_null($rain)) {
 			$this->rain = $rain;
 		}
