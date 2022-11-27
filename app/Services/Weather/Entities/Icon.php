@@ -33,7 +33,13 @@ class Icon implements Arrayable
 	protected $night;
 
 
-	public static function create(int $index) {
+	/**
+	 * @param integer $index
+	 * @return self
+	 *
+	 * @throws NotFoundIconIndex
+	 */
+	public static function create(int $index): self {
 		$icon_trans = trans("icons.{$index}");
 
 		if(is_array($icon_trans) && count($icon_trans)) {

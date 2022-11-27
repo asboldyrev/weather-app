@@ -29,7 +29,7 @@ class Time implements Arrayable
 	}
 
 
-	public function toArray() {
+	public function toArray(): array {
 		return [
 			'timezone' => $this->timezone,
 			'offset' => $this->offset,

@@ -27,7 +27,7 @@ class Sun implements Arrayable
 	}
 
 
-	public function toArray() {
+	public function toArray(): array {
 		return [
 			'sunrise' => $this->sunrise,
 			'sunset' => $this->sunset,
@@ -43,7 +43,7 @@ class Sun implements Arrayable
 	}
 
 
-	protected function hasNight() {
+	protected function hasNight(): bool {
 		$now = time();
 
 		return $this->sunset < $now || $this->sunrise > $now;

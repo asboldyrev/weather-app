@@ -24,7 +24,7 @@ class Temperature implements Arrayable
 	}
 
 
-	public function toArray() {
+	public function toArray(): array {
 		return [
 			'value' => $this->value,
 			'unit' => $this->unit

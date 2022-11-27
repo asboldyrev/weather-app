@@ -53,7 +53,7 @@ class Wind implements Arrayable
 	}
 
 
-	public function toArray() {
+	public function toArray(): array {
 		return [
 			'speed' => $this->speed,
 			'degress' => $this->degress,
@@ -137,7 +137,7 @@ class Wind implements Arrayable
 	}
 
 
-	protected function findName() {
+	protected function findName(): string {
 		return trans("wind.names.{$this->index}");
 	}
 }

@@ -52,7 +52,7 @@ class Place implements Arrayable
 	}
 
 
-	public function toArray():array {
+	public function toArray(): array {
 		return [
 			'coords' => [
 				'latitude' => $this->latitude,

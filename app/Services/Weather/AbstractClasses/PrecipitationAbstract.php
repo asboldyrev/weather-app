@@ -30,7 +30,7 @@ abstract class PrecipitationAbstract implements Arrayable
 	 * @param float|null $pop Probability of precipitation
 	 * @return void
 	 */
-	public static function create(float $volume, string $unit = null, float $pop = null) {
+	public static function create(float $volume, string $unit = null, float $pop = null): self {
 		return new self($volume, $unit, $pop);
 	}
 
@@ -47,7 +47,7 @@ abstract class PrecipitationAbstract implements Arrayable
 	}
 
 
-	public function toArray() {
+	public function toArray(): array {
 		return [
 			'volume' => $this->volume,
 			'unit' => $this->unit,

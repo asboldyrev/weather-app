@@ -4,6 +4,7 @@ namespace App\Services\Weather;
 
 use App\Services\Weather\Entities\Place;
 use Illuminate\Support\Facades\Http;
+use stdClass;
 
 class Nominatim {
 	public static function getPlace(float $latitude, float $longitude):Place {
@@ -20,7 +21,7 @@ class Nominatim {
 	}
 
 
-	protected static function getData(float $latitude, float $longitude) {
+	protected static function getData(float $latitude, float $longitude): stdClass {
 		$params = [
 			'lat' => $latitude,
 			'lon' => $longitude,
