@@ -17,7 +17,7 @@ class Temperature implements Arrayable
 	protected $unit = '';
 
 
-	public static function create(float $value, ?string $unit): self {
+	public static function create(float $value, string $unit = null): self {
 		$temperature = new self($value, $unit);
 
 		return $temperature;
@@ -32,7 +32,7 @@ class Temperature implements Arrayable
 	}
 
 
-	protected function __construct(float $value, ?string $unit) {
+	protected function __construct(float $value, string $unit = null) {
 		$this->value = $value;
 
 		if (is_null($unit)) {

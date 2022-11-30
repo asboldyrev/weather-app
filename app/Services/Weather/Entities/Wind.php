@@ -42,7 +42,7 @@ class Wind implements Arrayable
 	protected $name = '';
 
 
-	public static function create(float $speed, float $degress, ?string $unit, ?float $gust): self {
+	public static function create(float $speed, float $degress, string $unit = null, float $gust = null): self {
 		$wind = new self($speed, $degress, $gust);
 
 		if(is_null($unit)) {
@@ -67,7 +67,7 @@ class Wind implements Arrayable
 	}
 
 
-	protected function __construct(float $speed, float $degress, ?float $gust) {
+	protected function __construct(float $speed, float $degress, float $gust = null) {
 		$this->speed = $speed;
 		$this->degress = $degress;
 		$this->direction = $this->findDirection($degress);

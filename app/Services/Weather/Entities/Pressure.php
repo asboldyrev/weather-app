@@ -17,7 +17,7 @@ class Pressure implements Arrayable
 	protected $unit;
 
 
-	public static function create(float $value, ?string $unit): self {
+	public static function create(float $value, string $unit = null): self {
 		return new self($value, $unit);
 	}
 
@@ -30,7 +30,7 @@ class Pressure implements Arrayable
 	}
 
 
-	protected function __construct(float $value, ?string $unit) {
+	protected function __construct(float $value, string $unit = null) {
 		$this->value = $value;
 
 		if(is_null($unit)) {
