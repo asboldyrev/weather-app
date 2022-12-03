@@ -39,8 +39,7 @@
 
 <style lang="scss">
 svg {
-	width: 24px;
-	height: 24px;
+	height: 24rem;
 }
 
 .menu {
@@ -73,7 +72,7 @@ svg {
 		}
 
 		&.active .icon {
-			transform: scale(1.5) translateY(-2px);
+			transform: scale(1.5) translateY(-3rem);
 
 			svg {
 				stroke: var(--orange);
