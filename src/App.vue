@@ -4,7 +4,7 @@
 
 <template>
 	<div class="layout">
-		<div class="">1</div>
+		<div class="content">1</div>
 		<Menu></Menu>
 	</div>
 </template>
