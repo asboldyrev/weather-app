@@ -5,7 +5,7 @@ return [
 		'speed' => 'm/s',
 		'temperature' => '°C',
 		'length' => 'm',
-		'pressure' => 'kPa',
+		'pressure' => 'hPa',
 	],
 	'imperial' => [
 		'speed' => 'mph',

@@ -38,9 +38,9 @@ class Weather implements Arrayable
 	protected $icon;
 
 	/**
-	 * @var Time
+	 * @var Uvi
 	 */
-	protected $time;
+	protected $uvi;
 
 	/**
 	 * @var float|null
@@ -65,12 +65,12 @@ class Weather implements Arrayable
 		float $humidity,
 		Wind $wind,
 		Icon $icon,
-		Time $time,
+		Uvi $uvi = null,
 		float $clouds = null,
 		float $visibility = null,
 		Precipitation $precipitation = null
 	): self {
-		$weather = new self($minTemperature, $maxTemperature, $pressure, $humidity, $wind, $icon, $time, $clouds, $visibility, $precipitation);
+		$weather = new self($minTemperature, $maxTemperature, $pressure, $humidity, $wind, $icon, $uvi, $clouds, $visibility, $precipitation);
 
 		return $weather;
 	}
@@ -78,16 +78,16 @@ class Weather implements Arrayable
 
 	public function toArray(): array {
 		return [
-			'minTemperature' => $this->minTemperature,
-			'maxTemperature' => $this->maxTemperature,
-			'pressure' => $this->pressure,
+			'minTemperature' => $this->minTemperature->toArray(),
+			'maxTemperature' => $this->maxTemperature->toArray(),
+			'pressure' => $this->pressure->toArray(),
 			'humidity' => $this->humidity,
-			'wind' => $this->wind,
-			'icon' => $this->icon,
-			'time' => $this->time,
+			'wind' => $this->wind->toArray(),
+			'icon' => $this->icon->toArray(),
+			'uvi' => $this->uvi ? $this->uvi->toArray() : null,
 			'clouds' => $this->clouds,
 			'visibility' => $this->visibility,
-			'precipitation' => $this->precipitation,
+			'precipitation' => $this->precipitation ? $this->precipitation->toArray() : null,
 		];
 	}
 
@@ -99,7 +99,7 @@ class Weather implements Arrayable
 		float $humidity,
 		Wind $wind,
 		Icon $icon,
-		Time $time,
+		Uvi $uvi = null,
 		float $clouds = null,
 		float $visibility = null,
 		Precipitation $precipitation = null
@@ -110,7 +110,7 @@ class Weather implements Arrayable
 		$this->humidity = $humidity;
 		$this->wind = $wind;
 		$this->icon = $icon;
-		$this->time = $time;
+		$this->uvi = $uvi;
 		$this->clouds = $clouds;
 		$this->visibility = $visibility;
 		$this->precipitation = $precipitation;

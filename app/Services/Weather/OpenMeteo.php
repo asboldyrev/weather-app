@@ -2,15 +2,24 @@
 
 namespace App\Services\Weather;
 
+use App\Services\Weather\Entities\Icon;
 use App\Services\Weather\Entities\Place;
 use App\Services\Weather\Entities\Pollution;
+use App\Services\Weather\Entities\Precipitation;
+use App\Services\Weather\Entities\Pressure;
+use App\Services\Weather\Entities\Temperature;
 use App\Services\Weather\Entities\Time;
+use App\Services\Weather\Entities\Weather;
+use App\Services\Weather\Entities\Wind;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use stdClass;
 
 class OpenMeteo implements Arrayable
 {
+	const TTL_CACHE = 10 * 60;
+
 	/**
 	 * @var Place
 	 */
@@ -22,9 +31,15 @@ class OpenMeteo implements Arrayable
 	protected $time;
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	protected $pollutions = [];
+
+	/**
+	 * @var Weather
+	 */
+	protected $currentWeather;
+
 
 
 	public function load(array $data): self {
@@ -34,6 +49,7 @@ class OpenMeteo implements Arrayable
 		$this->place = Nominatim::getPlace($data['lat'], $data['lon']);
 		$this->time = Time::create($forecast->timezone);
 		$this->pollutions = $this->parsePollution($pollution->hourly, $pollution->hourly_units);
+		$this->currentWeather = $this->parseCurrentWeather($forecast);
 
 		return $this;
 	}
@@ -43,15 +59,34 @@ class OpenMeteo implements Arrayable
 		return [
 			'time' => $this->time->toArray(),
 			'place' => $this->place->toArray(),
-			//'current' => [
-			//	'pollutions' => array_map(
-			//		function(Pollution $pollution) {
-			//			return $pollution->toArray();
-			//		},
-			//		$this->pollutions
-			//	)
-			//]
+			'currentWeather' => $this->currentWeather->toArray(),
 		];
+	}
+
+
+	protected function parseCurrentWeather(stdClass $forecast) {
+		$temperature = Temperature::create($forecast->current_weather->temperature);
+		$pressure = Pressure::create($forecast->hourly->surface_pressure[0]);
+		$wind = Wind::create(
+			$forecast->current_weather->windspeed,
+			$forecast->current_weather->winddirection,
+			null,
+			$forecast->hourly->windgusts_10m[0]
+		);
+		$icon = Icon::create($forecast->current_weather->weathercode);
+
+		return Weather::create(
+			$temperature,
+			$temperature,
+			$pressure,
+			$forecast->hourly->relativehumidity_2m[0],
+			$wind,
+			$icon,
+			null,
+			$forecast->hourly->cloudcover[0],
+			$forecast->hourly->visibility[0]
+		);
+dd($forecast);
 	}
 
 
@@ -109,7 +144,26 @@ class OpenMeteo implements Arrayable
 			'timezone' => 'auto',
 			'current_weather' => true,
 			'hourly' => [
-				'visibility'
+				'temperature_2m',
+				'relativehumidity_2m',
+				'dewpoint_2m',
+				'apparent_temperature',
+				'precipitation',
+				'rain',
+				'showers',
+				'snowfall',
+				'weathercode',
+				'surface_pressure',
+				'cloudcover',
+				'visibility',
+				'windspeed_10m',
+				'winddirection_10m',
+				'windgusts_10m',
+				'soil_temperature_0cm',
+				'soil_temperature_6cm',
+				'soil_moisture_0_1cm',
+				'soil_moisture_1_3cm',
+				'soil_moisture_3_9cm',
 			]
 		];
 
@@ -148,6 +202,15 @@ class OpenMeteo implements Arrayable
 
 
 	protected function request(string $url, array $data) {
-		return Http::get($url, $data)->object();
+		$key_cache = 'open-meteo-' . md5(json_encode($data));
+
+		$content = Cache::get($key_cache);
+
+		if(!$content) {
+			$content = Http::get($url, $data)->object();
+			Cache::add($key_cache, $content, self::TTL_CACHE);
+		}
+
+		return $content;
 	}
 }

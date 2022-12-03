@@ -36,5 +36,7 @@ class Pressure implements Arrayable
 		if(is_null($unit)) {
 			$unit = trans('units.metric.pressure');
 		}
+
+		$this->unit = $unit;
 	}
 }

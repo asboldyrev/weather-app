@@ -60,7 +60,12 @@ class Pollution implements Arrayable
 	}
 
 
-	protected function getIndex(string $name, float $value): int {
+	/**
+	 * @param string $name
+	 * @param float $value
+	 * @return int|null
+	 */
+	protected function getIndex(string $name, float $value) {
 		$ranges = $this->ranges[$name] ?? [];
 
 		foreach ($ranges as $index => $range) {
