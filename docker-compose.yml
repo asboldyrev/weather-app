@@ -6,50 +6,7 @@ services:
     container_name: nginx
     ports:
       - ${NGINX_PORT_HTTP}:80
-      - ${NGINX_PORT_HTTPS}:443
     working_dir: /var/www
-    links:
-      - php
     volumes:
       - ./:/var/www
-      - ${NGINX_LOGS_PATH}:/var/log/nginx
-    depends_on:
-      - php
-
-  php:
-    image: aboldyrev/php-7.1-fpm:v1.0
-    container_name: php7.1
-    ports:
-      - 9000:9000
-    working_dir: /var/www
-    links:
-      - mysql
-    volumes:
-      - ./:/var/www
-      - ~/.ssh/:/root/.ssh/
-    depends_on:
-      - mysql
-
-  mysql:
-    image: mariadb:10.3
-    container_name: mariadb
-    restart: always
-    ports:
-      - 3306:3306
-    volumes:
-      - ${MYSQL_DB_PATH}:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-
-  phpmyadmin:
-    image: phpmyadmin:5.0.4
-    container_name: phpmyadmin
-    restart: always
-    links:
-      - mysql
-    ports:
-      - 8080:80
-    environment:
-      PMA_HOST: mysql
-    depends_on:
-      - mysql
+      - ./logs/:/var/log/nginx
