@@ -1,5 +1,5 @@
 # Weather App
 
 ![GitHub](https://img.shields.io/github/license/asboldyrev/weather-app?style=plastic)
-[![codebeat badge](https://codebeat.co/badges/34140957-1640-4771-bd5a-b211ab79a2f2)](https://codebeat.co/projects/github-com-asboldyrev-weather-app-only-front)
+[![codebeat badge](https://codebeat.co/badges/9ed90f71-26d0-4a0d-9e60-2494a343d7d8)](https://codebeat.co/projects/github-com-asboldyrev-weather-app-main)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/asboldyrev/weather-app?style=plastic)
