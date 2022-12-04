@@ -7,15 +7,15 @@ if (process.env.NODE_ENV === 'production') {
 	const assetUrls = [
 		'/',
 		'/js/app.js',
-		'/img/icon-512x512.png',
-		'/img/icon-384x384.png',
-		'/img/icon-256x256.png',
-		'/img/icon-192x192.png',
-		'/img/icons/colored-fill/not-available.svg',
-		'/img/icons/colored-line/barometer.svg',
-		'/img/icons/colored-line/windsock.svg',
-		'/img/icons/colored-line/humidity.svg',
-		'/img/icons/colored-line/compass.svg',
+		'/favicons/icon-512x512.png',
+		'/favicons/icon-384x384.png',
+		'/favicons/icon-256x256.png',
+		'/favicons/icon-192x192.png',
+		'/icons/colored-fill/not-available.svg',
+		'/icons/colored-line/barometer.svg',
+		'/icons/colored-line/windsock.svg',
+		'/icons/colored-line/humidity.svg',
+		'/icons/colored-line/compass.svg',
 	];
 
 	self.addEventListener('install', async event => {
