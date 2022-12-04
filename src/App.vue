@@ -13,17 +13,9 @@
 </template>
 
 <style lang="scss" scoped>
-.layout {
-	display: grid;
-	grid-template-rows: 1fr 20vw;
-	grid-auto-columns: 1fr;
-	grid-auto-rows: 1fr;
-	grid-auto-flow: row;
-	justify-items: stretch;
-	height: 100%;
-
-	.content {
-		margin: 10rem 10rem 0;
-	}
+.content {
+	box-sizing: border-box;
+	padding: 10rem 10rem 0;
+	margin-bottom: 75rem;
 }
 </style>

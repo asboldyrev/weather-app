@@ -14,6 +14,17 @@
 			<span class="text">Current</span>
 		</RouterLink>
 
+		<RouterLink :to="{ name: 'details' }" class="menu__item" active-class="active">
+			<span class="icon">
+
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+					<title>Albums</title>
+					<rect x="64" y="176" width="384" height="256" rx="28.87" ry="28.87" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M144 80h224M112 128h288"/>
+				</svg>
+			</span>
+			<span class="text">Details</span>
+		</RouterLink>
+
 		<RouterLink :to="{ name: 'forecast' }" class="menu__item" active-class="active">
 			<span class="icon">
 				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
@@ -42,8 +53,13 @@ svg {
 }
 
 .menu {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 75rem;
+
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	grid-auto-columns: 1fr;
 	grid-auto-rows: 1fr;
 	gap: 0px 0px;
