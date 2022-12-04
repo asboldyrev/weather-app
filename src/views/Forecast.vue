@@ -137,6 +137,7 @@ import { reactive, ref } from "@vue/reactivity";
 
 				&.active {
 					background-color: var(--current-line);
+					border-radius: 5rem;
 				}
 
 				.item__icon {
