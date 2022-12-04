@@ -64,6 +64,7 @@
 }
 
 .detail__item {
+	position: relative;
 	display: grid;
 	grid-template-columns: 1fr auto;
 	grid-auto-columns: 1fr;
@@ -72,9 +73,18 @@
 	grid-auto-flow: row;
 	justify-items: stretch;
 	margin-bottom: 10rem;
-	background-color: var(--current-line);
 	padding: 10rem;
-	border-radius: 5rem;
+
+	&::before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		background-color: var(--comment);
+		border-radius: 5rem;
+		opacity: .6;
+		z-index: -1;
+	}
 
 	&:last-child {
 		margin-bottom: 0;
