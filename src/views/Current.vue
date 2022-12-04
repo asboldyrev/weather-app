@@ -29,7 +29,6 @@
 	.header {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		margin: 10rem 10rem 0;
 
 		&__country {
 			h2 {

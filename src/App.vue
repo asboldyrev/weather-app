@@ -6,7 +6,7 @@
 <template>
 	<div class="layout">
 		<div class="content">
-			  <RouterView />
+			<RouterView />
 		</div>
 		<Menu></Menu>
 	</div>
@@ -21,5 +21,9 @@
 	grid-auto-flow: row;
 	justify-items: stretch;
 	height: 100%;
+
+	.content {
+		margin: 10rem 10rem 0;
+	}
 }
 </style>
