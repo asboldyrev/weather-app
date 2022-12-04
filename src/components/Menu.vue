@@ -1,13 +1,10 @@
 <script setup>
-	import { ref } from 'vue'
-
-	let current = ref(0);
-
+	import { RouterLink } from 'vue-router'
 </script>
 
 <template>
 	<div class="menu">
-		<a class="menu__item" href="#" :class="{ 'active': current == 0 }" @click.prevent="current = 0">
+		<RouterLink :to="{ name: 'current' }" class="menu__item" active-class="active">
 			<span class="icon">
 				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
 					<title>Umbrella</title>
@@ -15,8 +12,9 @@
 				</svg>
 			</span>
 			<span class="text">Current</span>
-		</a>
-		<a href="#" class="menu__item" :class="{ 'active': current == 1 }" @click.prevent="current = 1">
+		</RouterLink>
+
+		<RouterLink :to="{ name: 'forecast' }" class="menu__item" active-class="active">
 			<span class="icon">
 				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
 					<title>Analytics</title>
@@ -24,8 +22,9 @@
 				</svg>
 			</span>
 			<span class="text">Forecast</span>
-		</a>
-		<a href="#" class="menu__item" :class="{ 'active': current == 2 }" @click.prevent="current = 2">
+		</RouterLink>
+
+		<RouterLink :to="{ name: 'settings' }" class="menu__item" active-class="active">
 			<span class="icon">
 				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
 					<title>Settings</title>
@@ -33,7 +32,7 @@
 				</svg>
 			</span>
 			<span class="text">Settings</span>
-		</a>
+		</RouterLink>
 	</div>
 </template>
 
