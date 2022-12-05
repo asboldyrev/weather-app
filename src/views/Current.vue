@@ -20,7 +20,7 @@
 	</div>
 
 	<div class="weather">
-		<div class="weather__temperarure">27°</div>
+		<div class="weather__temperarure">28°</div>
 		<div class="weather__name">переменная облачность</div>
 	</div>
 </template>
