@@ -14,8 +14,8 @@
 	</div>
 
 	<div class="icon">
-		<img src="/icons/colored-fill/cloudy.svg" alt="">
-		<!--<img src="/icons/colored-fill/overcast-night-rain.svg" alt="">-->
+		<!--<img src="/icons/colored-fill/cloudy.svg" alt="">-->
+		<img src="/icons/colored-fill/overcast-night-rain.svg" alt="">
 		<!--<img src="/icons/colored-fill/thunderstorms-night-extreme-rain.svg" alt="">-->
 	</div>
 
