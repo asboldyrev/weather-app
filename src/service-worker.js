@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 
 	const assetUrls = [
 		'/',
-		'/js/app.js',
+		'/src/main.js',
 		'/favicons/icon-512x512.png',
 		'/favicons/icon-384x384.png',
 		'/favicons/icon-256x256.png',
@@ -38,32 +38,17 @@ if (process.env.NODE_ENV === 'production') {
 
 		const url = new URL(request.url)
 
-		if (
-			assetUrls.indexOf(url.pathname) != -1 &&
-			url.pathname.indexOf('api') == -1 &&
-			url.pathname.indexOf('browser-sync') == -1
-		) {
+		if (assetUrls.indexOf(url.pathname) != -1) {
 			event.respondWith(cacheFirst(request))
-		} else if (
-			url.pathname.indexOf('api') == -1 &&
-			url.pathname.indexOf('browser-sync') == -1
-		) {
+		} else {
 			event.respondWith(networkFirst(request))
-		} else if (
-			url.pathname.indexOf('api') != -1
-		) {
-			try {
-				const response = await fetch(request)
-				return response ?? await caches.match('/offline')
-			} catch (e) {
-				//
-			}
 		}
 	})
 
 	async function cacheFirst(request) {
 		const cached = await caches.match(request)
-		return cached ?? await fetch(request)
+
+		return cached || await fetch(request)
 	}
 
 	async function networkFirst(request) {
