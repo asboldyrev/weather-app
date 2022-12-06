@@ -15,6 +15,7 @@
 <template>
 	<a href="#" @click="showAbout()">About</a>
 
+	<div class="about-modal_backdrop" v-show="openedAbout"></div>
 	<div class="about-modal" v-show="openedAbout">
 		<div class="about-modal__body">
 			<p>Created: <a href="https://github.com/asboldyrev">Andrew Boldyrev</a></p>
@@ -32,6 +33,9 @@
 				</li>
 				<li>
 					<a href="https://ionic.io/ionicons" target="__blank">Ionicons</a> — system icons
+				</li>
+				<li>
+					<a href="https://hatscripts.github.io/circle-flags" target="__blank">Hatscripts flags</a> — country flags
 				</li>
 			</ul>
 		</div>
@@ -52,6 +56,17 @@
 		box-sizing: border-box;
 		background-color: var(--current-line);
 		border-radius: 10rem;
+
+		&_backdrop {
+			background-color: var(--background);
+			opacity: .7;
+			display: block;
+			width: 100vw;
+			height: 100vh;
+			top: 0;
+			left: 0;
+			position: absolute;
+		}
 
 		&__body {
 			padding: 10rem 20rem 0;
