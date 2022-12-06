@@ -1,12 +1,14 @@
 <script setup>
 	import About from '../components/About.vue'
-	import Seach from '../components/Search.vue'
+	import Search from '../components/Search.vue'
 </script>
 
 <template>
-
+	<div class="search">
+		<Search />
+	</div>
 	<div class="about">
-		<About></About>
+		<About />
 	</div>
 </template>
 
