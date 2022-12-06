@@ -14,14 +14,14 @@
 	</div>
 
 	<div class="icon">
-		<img src="/icons/colored-fill/cloudy.svg" alt="">
-		<!--<img src="/icons/colored-fill/overcast-night-rain.svg" alt="">-->
+		<!--<img src="/icons/colored-fill/cloudy.svg" alt="">-->
+		<img src="/icons/colored-fill/overcast-night-rain.svg" alt="">
 		<!--<img src="/icons/colored-fill/thunderstorms-night-extreme-rain.svg" alt="">-->
 	</div>
 
 	<div class="weather">
-		<div class="weather__temperarure">27°</div>
-		<div class="weather__name">переменная облачность</div>
+		<div class="weather__temperarure">28°</div>
+		<div class="weather__name">Дождь</div>
 	</div>
 </template>
 
