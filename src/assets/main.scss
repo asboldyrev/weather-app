@@ -20,6 +20,11 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16rem;
 }
+
+a {
+	color: var(--cyan);
+}
+
 :root {
 	// Dracula theme
 	--background: #282a36;

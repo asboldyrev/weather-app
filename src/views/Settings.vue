@@ -1,18 +1,18 @@
 <script setup>
+	import About from '../components/About.vue'
+	import Seach from '../components/Search.vue'
 </script>
 
 <template>
-	Settings
 
-	<p>Resourses:</p>
-	<ul>
-		<li>https://open-meteo.com</li>
-		<li>https://github.com/basmilius/weather-icons</li>
-		<li>https://draculatheme.com/</li>
-		<li>https://ionic.io/ionicons</li>
-	</ul>
+	<div class="about">
+		<About></About>
+	</div>
 </template>
 
-<style>
-
+<style lang="scss" scoped>
+	.about {
+		text-align: center;
+		display: block;
+	}
 </style>
