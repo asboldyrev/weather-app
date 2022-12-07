@@ -13,13 +13,13 @@
 </script>
 
 <template>
-	<a href="#" @click="showAbout()">About</a>
+	<a href="#" @click.prevent="showAbout()">About</a>
 
 	<div class="about-modal_backdrop" v-show="openedAbout"></div>
 	<div class="about-modal" v-show="openedAbout">
 		<div class="about-modal__body">
-			<p>Created: <a href="https://github.com/asboldyrev">Andrew Boldyrev</a></p>
-			<p>Source code: <a href="https://github.com/asboldyrev/weather-app">GitHub</a></p>
+			<p>Created: <a href="https://github.com/asboldyrev" target="__blank">Andrew Boldyrev</a></p>
+			<p>Source code: <a href="https://github.com/asboldyrev/weather-app" target="__blank">GitHub</a></p>
 			<p>Resources used:</p>
 			<ul>
 				<li>
@@ -40,7 +40,7 @@
 			</ul>
 		</div>
 		<div class="about-modal__footer">
-			<a href="#" @click="closeAbout()">Close</a>
+			<a href="#" @click.prevent="closeAbout()">Close</a>
 		</div>
 	</div>
 </template>
