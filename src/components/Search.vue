@@ -2,8 +2,10 @@
 	import { ref } from "@vue/reactivity";
 	import { watch } from "@vue/runtime-core";
 	import { useCityStore } from '../stores/city'
+import { useWeatherStore } from "../stores/weather";
 
-	let store = useCityStore();
+	let storeCity = useCityStore();
+	let storeWeather = useWeatherStore();
 
 	let cities = ref([]);
 	let search = ref('');
@@ -33,7 +35,8 @@
 	}
 
 	const selectCity = (index) => {
-		store.setCity(cities.value[index]);
+		storeCity.setCity(cities.value[index]);
+		storeWeather.updateWeather();
 		cities.value = [];
 		search.value = '';
 	}
