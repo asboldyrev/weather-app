@@ -1,6 +1,15 @@
 <script setup>
 	import Menu from './components/Menu.vue'
 	import { RouterView } from 'vue-router'
+
+	import { useWeatherStore } from './stores/weather'
+import { onBeforeMount } from 'vue-demi';
+
+	let store = useWeatherStore();
+
+	onBeforeMount(() => {
+		store.updateWeather();
+	});
 </script>
 
 <template>

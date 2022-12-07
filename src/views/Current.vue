@@ -1,27 +1,48 @@
 <script setup>
+	import { computed } from 'vue-demi';
+	import { useCityStore } from '../stores/city'
+	import { useWeatherStore } from '../stores/weather';
+	import dayjs from 'dayjs';
+
+	let cityStore = useCityStore();
+	let weatherStore = useWeatherStore();
+
+	const temperature = computed(() => {
+		return Math.round(weatherStore.getWeather()?.hourly?.temperature_2m[0]) + '°';
+	});
+
+	const time = computed(() => {
+		return dayjs(weatherStore.getWeather()?.hourly?.time[0]).format('HH:mm');
+	});
+
+	const date = computed(() => {
+		return dayjs(weatherStore.getWeather()?.hourly?.time[0]).format('dd, D MMMM');
+	});
+
+	const icon = computed(() => {
+		return weatherStore.getIcon(weatherStore.getWeather()?.hourly?.weathercode[0]);
+	});
 </script>
 
 <template>
 	<div class="header">
 		<div class="header__country">
-			<h2>Беспаловский</h2>
-			<h3>Россия</h3>
+			<h2>{{ cityStore.getCityField('name') }}</h2>
+			<h3>{{ cityStore.getCityField('country') }}</h3>
 		</div>
 		<div class="header__date">
-			<p class="header__date-time">18:30</p>
-			<p class="header__date-date">пн, 25 июня</p>
+			<p class="header__date-time">{{ time }}</p>
+			<p class="header__date-date">{{ date }}</p>
 		</div>
 	</div>
 
 	<div class="icon">
-		<!--<img src="/icons/colored-fill/cloudy.svg" alt="">-->
-		<img src="/icons/colored-fill/overcast-night-rain.svg" alt="">
-		<!--<img src="/icons/colored-fill/thunderstorms-night-extreme-rain.svg" alt="">-->
+		<img :src="`/icons/colored-fill/${icon?.day || 'not-available'}.svg`" alt="">
 	</div>
 
 	<div class="weather">
-		<div class="weather__temperarure">28°</div>
-		<div class="weather__name">Дождь</div>
+		<div class="weather__temperarure">{{ temperature }}</div>
+		<div class="weather__name">{{ icon?.name }}</div>
 	</div>
 </template>
 

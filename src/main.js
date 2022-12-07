@@ -3,8 +3,10 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import ruLocale from 'dayjs/locale/ru'
 
 import './assets/main.scss'
+import dayjs from 'dayjs'
 
 const app = createApp(App)
 
@@ -13,6 +15,7 @@ app.use(router)
 
 app.mount('#app')
 
+dayjs.locale(ruLocale);
 
 //window.addEventListener('load', async () => {
 //	if ('serviceWorker' in navigator) {
