@@ -14,7 +14,11 @@ export const useCityStore = defineStore('city', () => {
 		localStorage.setItem('city', JSON.stringify(newСity));
 	}
 
+	const getCityField = (field) => {
+		return city.value[field] || undefined;
+	}
+
 	return {
-		city, getCity, setCity
+		city, getCity, setCity, getCityField
 	}
 })
