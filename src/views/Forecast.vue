@@ -165,11 +165,11 @@ import { reactive, ref } from "@vue/reactivity";
 				gap: 0px 0px;
 				grid-auto-flow: row;
 				justify-items: stretch;
-				border-top: 1rem solid var(--current-line);
+				border-top: 1rem solid var(--comment);
 				padding: 6rem 12rem;
 
 				&:last-child {
-					border-bottom: 1rem solid var(--current-line);
+					border-bottom: 1rem solid var(--comment);
 				}
 
 				&__value {
