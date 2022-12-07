@@ -33,7 +33,7 @@
 			icon: 'colored-fill/sunset'
 		},
 		{
-			title: 'Moon',
+			title: 'Moonrise',
 			description: '21:29',
 			value: 'Now',
 			icon: 'colored-fill/moonrise'
@@ -67,27 +67,12 @@
 	position: relative;
 	display: grid;
 	grid-template-columns: 1fr auto;
-	grid-auto-columns: 1fr;
-	grid-auto-rows: 1fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	justify-items: stretch;
-	margin-bottom: 10rem;
 	padding: 10rem;
+	border-top: 1px solid var(--comment);
+	box-sizing: border-box;
 
-	&::before {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		background-color: var(--comment);
-		border-radius: 5rem;
-		opacity: .6;
-		z-index: -1;
-	}
-
-	&:last-child {
-		margin-bottom: 0;
+	&:first-child {
+		border: none;
 	}
 
 	.content {
