@@ -28,6 +28,9 @@
 		}
 	});
 
+	const clearSearch = () => {
+		search.value = '';
+	}
 
 	const selectCity = (index) => {
 		store.setCity(cities.value[index]);
@@ -39,8 +42,20 @@
 <template>
 	<div class="search">
 		<div class="search__form">
-			<input type="text" list="points" class="search__form__input" placeholder="London" v-model="search">
-			<button type="button" class="search__form__button">Find</button>
+			<input
+				type="text"
+				list="points"
+				class="search__form_input"
+				placeholder="London"
+				:value="search"
+				@input="e => search = e.target.value"
+			>
+			<div class="search__form_clear" v-if="search.length" @click="clearSearch">
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+					<title>Close</title>
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/>
+				</svg>
+			</div>
 		</div>
 		<div class="search__list" v-show="cities.length">
 			<div class="option" v-for="(city, index) in cities" :key="index" @click="selectCity(index)">
@@ -63,13 +78,12 @@
 			grid-template-rows: 1fr;
 			margin-bottom: 12rem;
 
-			&__input {
+			&_input {
 				padding: 10rem 15rem;
 				box-sizing: border-box;
 				font-size: 16rem;
 				border: 2px solid var(--comment);
-				border-radius: 5rem 0rem 0rem 5rem;
-				border-right: none;
+				border-radius: 5rem;
 				background-color: var(--current-line);
 				color: var(--foreground);
 
@@ -79,15 +93,10 @@
 				}
 			}
 
-			&__button {
-				padding: 5rem 10rem;
-				box-sizing: border-box;
-				font-size: 16rem;
-				background-color: var(--comment);
-				border: 2px solid var(--comment);
-				color: var(--foreground);
-				border-radius: 0rem 5rem 5rem 0rem;
-				border-left: none;
+			&_clear {
+				position: absolute;
+				top: 10rem;
+				right: 10rem;
 			}
 		}
 
