@@ -7,20 +7,22 @@
 	let cityStore = useCityStore();
 	let weatherStore = useWeatherStore();
 
+	let currentHour = dayjs().hour();
+
 	const temperature = computed(() => {
-		return Math.round(weatherStore.getWeather()?.hourly?.temperature_2m[0]) + '°';
+		return Math.round(weatherStore.getWeather()?.hourly?.temperature_2m[currentHour]) + '°';
 	});
 
 	const time = computed(() => {
-		return dayjs(weatherStore.getWeather()?.hourly?.time[0]).format('HH:mm');
+		return dayjs(weatherStore.getWeather()?.hourly?.time[currentHour]).format('HH:mm');
 	});
 
 	const date = computed(() => {
-		return dayjs(weatherStore.getWeather()?.hourly?.time[0]).format('dd, D MMMM');
+		return dayjs(weatherStore.getWeather()?.hourly?.time[currentHour]).format('dd, D MMMM');
 	});
 
 	const icon = computed(() => {
-		return weatherStore.getIcon(weatherStore.getWeather()?.hourly?.weathercode[0]);
+		return weatherStore.getIcon(weatherStore.getWeather()?.hourly?.weathercode[currentHour]);
 	});
 </script>
 
