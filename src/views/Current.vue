@@ -1,28 +1,36 @@
 <script setup>
-	import { computed } from 'vue-demi';
+	import { computed } from 'vue';
+	import dayjs from 'dayjs';
 	import { useCityStore } from '../stores/city'
 	import { useWeatherStore } from '../stores/weather';
-	import dayjs from 'dayjs';
+	import { useSettingsStore } from '../stores/settings';
 
-	let cityStore = useCityStore();
-	let weatherStore = useWeatherStore();
+	const cityStore = useCityStore();
+	const weatherStore = useWeatherStore();
+	const settingsStore = useSettingsStore()
 
-	let currentHour = dayjs().hour();
+	let currentHour = computed(() => {
+		if(settingsStore.timezone) {
+			return dayjs().tz(settingsStore.timezone).hour();
+		} else {
+			return dayjs().hour();
+		}
+	});
 
 	const temperature = computed(() => {
-		return Math.round(weatherStore.weather?.hourly?.temperature_2m[currentHour]) + '°';
+		return Math.round(weatherStore.weather?.hourly?.temperature_2m[currentHour.value]) + '°';
 	});
 
 	const time = computed(() => {
-		return dayjs(weatherStore.weather?.hourly?.time[currentHour]).format('HH:mm');
+		return dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('HH:mm');
 	});
 
 	const date = computed(() => {
-		return dayjs(weatherStore.weather?.hourly?.time[currentHour]).format('dd, D MMMM');
+		return dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('dd, D MMMM');
 	});
 
 	const icon = computed(() => {
-		return weatherStore.getIcon(weatherStore.weather?.hourly?.weathercode[currentHour]);
+		return weatherStore.getIcon(weatherStore.weather?.hourly?.weathercode[currentHour.value]);
 	});
 </script>
 
