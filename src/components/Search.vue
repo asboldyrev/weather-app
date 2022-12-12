@@ -114,6 +114,7 @@ import { useWeatherStore } from "../stores/weather";
 			left: 0;
 			max-height: 320rem;
 			overflow-y: auto;
+			z-index: 9999;
 
 			.option {
 				display: grid;
