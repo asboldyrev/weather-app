@@ -1,34 +1,23 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, reactive, ref } from "vue";
+import { dailyProperties, hourlyProperties } from "../use/openMeteoProperties";
 
 import { useCityStore } from './city'
+import { useSettingsStore } from './settings'
 
 export const useWeatherStore = defineStore('weather', () => {
-	let city = useCityStore();
+	const cityStore = useCityStore();
+	const settingsStore = useSettingsStore();
 
-	const params = new URLSearchParams({
-		latitude: city.getCity().latitude,
-		longitude: city.getCity().longitude,
-		hourly: [
-			'temperature_2m',
-			'relativehumidity_2m',
-			'dewpoint_2m',
-			'apparent_temperature',
-			'precipitation',
-			'rain',
-			'showers',
-			'snowfall',
-			'weathercode',
-			'surface_pressure',
-			'cloudcover',
-			'visibility',
-			'windspeed_10m',
-			'winddirection_10m',
-			'windgusts_10m',
-		]
+	const params = reactive({
+		latitude: cityStore.city.latitude,
+		longitude: cityStore.city.longitude,
+		timezone: settingsStore.timezone,
+		hourly: hourlyProperties(),
+		daily: dailyProperties(),
 	});
 
-	let weather = ref({});
+	let _weather = ref({});
 	let icons = ref({});
 
 	fetch('/icons.json')
@@ -37,30 +26,31 @@ export const useWeatherStore = defineStore('weather', () => {
 			icons.value = response;
 		});
 
-	const updateWeather = async () => {
-		if (city.getCityField('latitude')) {
-			await fetch(decodeURIComponent(`https://api.open-meteo.com/v1/forecast?${params.toString()}`))
+	async function updateWeather() {
+		if (cityStore.getCityField('latitude')) {
+			params.latitude = cityStore.getCityField('latitude');
+			params.longitude = cityStore.getCityField('longitude');
+			params.timezone = settingsStore.timezone;
+
+			await fetch(decodeURIComponent(`https://api.open-meteo.com/v1/forecast?${new URLSearchParams(params).toString()}`))
 				.then(response => response.json())
 				.then(response => {
-					weather.value = response;
+					_weather.value = response;
 				});
 		}
-
-		return weather.value;
 	}
 
-	const getWeather = () => {
-		return weather.value;
-	}
-
-	const getIcon = (code) => {
+	function getIcon(code) {
 		return icons.value[code] || undefined;
 	}
 
+	const weather = computed(() => {
+		return _weather.value;
+	});
+
 	return {
-		weather,
-		getWeather,
 		updateWeather,
-		getIcon
+		getIcon,
+		weather,
 	}
 })

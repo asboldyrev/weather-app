@@ -4,12 +4,15 @@
 	import Search from '../components/Search.vue'
 	import { useCityStore } from '../stores/city'
 	import { useSettingsStore } from '../stores/settings'
+	import { useWeatherStore } from '../stores/weather';
 
 	let cityStore = useCityStore();
 	let settingsStore = useSettingsStore();
+	let weatherStore = useWeatherStore()
 
 	const setTimezone = (event) => {
 		settingsStore.setTimezoneMode(event.target.checked);
+		weatherStore.updateWeather();
 	}
 </script>
 

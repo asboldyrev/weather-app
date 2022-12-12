@@ -10,19 +10,19 @@
 	let currentHour = dayjs().hour();
 
 	const temperature = computed(() => {
-		return Math.round(weatherStore.getWeather()?.hourly?.temperature_2m[currentHour]) + '°';
+		return Math.round(weatherStore.weather?.hourly?.temperature_2m[currentHour]) + '°';
 	});
 
 	const time = computed(() => {
-		return dayjs(weatherStore.getWeather()?.hourly?.time[currentHour]).format('HH:mm');
+		return dayjs(weatherStore.weather?.hourly?.time[currentHour]).format('HH:mm');
 	});
 
 	const date = computed(() => {
-		return dayjs(weatherStore.getWeather()?.hourly?.time[currentHour]).format('dd, D MMMM');
+		return dayjs(weatherStore.weather?.hourly?.time[currentHour]).format('dd, D MMMM');
 	});
 
 	const icon = computed(() => {
-		return weatherStore.getIcon(weatherStore.getWeather()?.hourly?.weathercode[currentHour]);
+		return weatherStore.getIcon(weatherStore.weather?.hourly?.weathercode[currentHour]);
 	});
 </script>
 
