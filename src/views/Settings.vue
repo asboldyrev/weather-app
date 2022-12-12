@@ -21,8 +21,8 @@
 	<div class="settings">
 		<div class="settings__item">
 			<div class="settings__item_name">Current City</div>
-			<div class="settings__item_value" v-if="cityStore.getCity()?.id">
-				{{ cityStore.getCity()?.name }} ({{ cityStore.getCity()?.country }})
+			<div class="settings__item_value" v-if="cityStore.city?.id">
+				{{ cityStore.city?.name }} ({{ cityStore.city?.country }})
 			</div>
 		</div>
 		<div class="settings__item" :class="{ disabled: !cityStore.getCityField('timezone') }">
