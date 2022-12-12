@@ -1,35 +1,39 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-
-const firstSettings = {
-	localTimezone: true
-};
-
-if (!localStorage.getItem('settings')) {
-	localStorage.setItem('settings', JSON.stringify(firstSettings));
-}
+import { useCityStore } from './city';
 
 export const useSettingsStore = defineStore('settings', () => {
-	const savedSettings = localStorage.getItem('settings');
-	let settings = ref(JSON.parse(savedSettings));
+	const savedSettings = JSON.parse(localStorage.getItem('settings'));
+	const city = useCityStore();
 
-	const setSetting = (property, newValue) => {
-		settings.value[property] = newValue;
-		saveSetting();
+	let isLocalTimezone = ref(savedSettings?.isLocalTimezone);
+
+	if (!savedSettings) {
+		setTimezoneMode(true);
 	}
 
-	const getSetting = (property) => {
-		return settings.value[property];
+	function setTimezoneMode(mode) {
+		isLocalTimezone.value = mode;
+		localStorage.setItem('settings', JSON.stringify({
+			isLocalTimezone: isLocalTimezone.value,
+		}));
 	}
 
+	const timezoneMode = computed(() => {
+		return isLocalTimezone.value;
+	});
 
-	const saveSetting = () => {
-		localStorage.setItem('settings', JSON.stringify(settings.value));
-	}
+	const timezone = computed(() => {
+		if (!isLocalTimezone.value && city.getCityField('timezone')) {
+			return city.getCityField('timezone');
+		} else {
+			return Intl.DateTimeFormat().resolvedOptions().timeZone;
+		}
+	});
 
 	return {
-		settings,
-		setSetting,
-		getSetting
+		setTimezoneMode,
+		timezoneMode,
+		timezone,
 	}
 })

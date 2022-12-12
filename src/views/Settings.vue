@@ -1,6 +1,6 @@
 <script setup>
 	import { ref, watch } from 'vue-demi';
-import About from '../components/About.vue'
+	import About from '../components/About.vue'
 	import Search from '../components/Search.vue'
 	import { useCityStore } from '../stores/city'
 	import { useSettingsStore } from '../stores/settings'
@@ -9,7 +9,7 @@ import About from '../components/About.vue'
 	let settingsStore = useSettingsStore();
 
 	const setTimezone = (event) => {
-		settingsStore.setSetting('localTimezone', event.target.checked);
+		settingsStore.setTimezoneMode(event.target.checked);
 	}
 </script>
 
@@ -21,11 +21,11 @@ import About from '../components/About.vue'
 	<div class="settings">
 		<div class="settings__item">
 			<div class="settings__item_name">Current City</div>
-			<div class="settings__item_value">
+			<div class="settings__item_value" v-if="cityStore.getCity()?.id">
 				{{ cityStore.getCity()?.name }} ({{ cityStore.getCity()?.country }})
 			</div>
 		</div>
-		<div class="settings__item">
+		<div class="settings__item" :class="{ disabled: !cityStore.getCityField('timezone') }">
 			<div class="settings__item_name">Timezone</div>
 			<div class="settings__item_value">
 				<div class="timezone">
@@ -34,7 +34,8 @@ import About from '../components/About.vue'
 						type="checkbox"
 						class="timezone__input"
 						@click="setTimezone"
-						:checked="settingsStore.getSetting('localTimezone')"
+						:checked="settingsStore.timezoneMode"
+						:disabled="!cityStore.getCityField('timezone')"
 					>
 					<span class="timezone__label_after">Local</span>
 				</div>
@@ -72,6 +73,10 @@ import About from '../components/About.vue'
 			&_name {
 				color: var(--cyan);
 				font-weight: 600;
+			}
+
+			&.disabled {
+				opacity: .6;
 			}
 		}
 	}
