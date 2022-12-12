@@ -10,6 +10,8 @@ import timezone from 'dayjs/plugin/timezone'
 import './assets/main.scss'
 import dayjs from 'dayjs'
 
+const version = 'v0.1';
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -18,8 +20,13 @@ app.use(router)
 app.mount('#app')
 
 dayjs.locale(ruLocale);
-dayjs.extend(utc)
-dayjs.extend(timezone)
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+if(localStorage.getItem('version') != version) {
+	localStorage.clear();
+	localStorage.setItem('version', version);
+}
 
 //window.addEventListener('load', async () => {
 //	if ('serviceWorker' in navigator) {
