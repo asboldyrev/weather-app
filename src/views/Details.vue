@@ -1,57 +1,102 @@
 <script setup>
-	import { reactive } from "vue"
+	import dayjs from "dayjs";
+	import { computed, reactive } from "vue"
+	import { useSettingsStore } from "../stores/settings";
+	import { useWeatherStore } from "../stores/weather";
 
-	let details = reactive([
-		{
-			title: 'Humidity',
-			description: '',
-			value: '54%',
-			icon: 'colored-fill/humidity'
-		},
-		{
-			title: 'Pressure',
-			description: '',
-			value: '1005 hPa',
-			icon: 'colored-fill/barometer'
-		},
-		{
-			title: 'Wind',
-			description: 'Light. 3.55m/s',
-			value: '2.58 m/s',
-			icon: 'colored-fill/windsock'
-		},
-		{
-			title: 'UV index',
-			description: '0.79',
-			value: 'Low',
-			icon: 'colored-fill/uv-index-1'
-		},
-		{
-			title: 'Sunset',
-			description: '21:29',
-			value: '3 hours',
-			icon: 'colored-fill/sunset'
-		},
-		{
-			title: 'Moonrise',
-			description: '21:29',
-			value: 'Now',
-			icon: 'colored-fill/moonrise'
-		},
-	])
+	const settingsStore = useSettingsStore();
+	const weatherStore = useWeatherStore();
 
+	const currentHour = computed(() => {
+		if(settingsStore.timezone) {
+			return dayjs().tz(settingsStore.timezone).hour();
+		} else {
+			return dayjs().hour();
+		}
+	});
+
+	const details = computed(() => {
+		return [
+			//{
+			//	title: 'sunrise',
+			//	value: weatherStore.weather?.daily?.sunrise[0],
+			//},
+			//{
+			//	title: 'sunset',
+			//	value: weatherStore.weather?.daily?.sunset[0],
+			//},
+			//{
+			//	title: 'shortwave_radiation_sum',
+			//	value: weatherStore.weather?.daily?.shortwave_radiation_sum[0],
+			//},
+
+
+			{
+				title: 'Humidity',
+				value: weatherStore.weather?.hourly?.relativehumidity_2m[currentHour.value] + ' %',
+			},
+			{
+				title: 'Dew point',
+				value: weatherStore.weather?.hourly?.dewpoint_2m[currentHour.value] + ' °',
+			},
+			{
+				title: 'Apparent temperature',
+				value: weatherStore.weather?.hourly?.apparent_temperature[currentHour.value] + ' °',
+			},
+			{
+				title: 'Precipitation',
+				value: weatherStore.weather?.hourly?.precipitation[currentHour.value] + ' mm',
+			},
+			{
+				title: 'Rain',
+				value: weatherStore.weather?.hourly?.rain[currentHour.value] + ' mm',
+			},
+			{
+				title: 'Showers',
+				value: weatherStore.weather?.hourly?.showers[currentHour.value] + ' mm',
+			},
+			{
+				title: 'Snowfall',
+				value: weatherStore.weather?.hourly?.snowfall[currentHour.value] + ' mm',
+			},
+			{
+				title: 'Pressure',
+				value: weatherStore.weather?.hourly?.surface_pressure[currentHour.value] + ' hPa',
+			},
+			{
+				title: 'Cloudcover',
+				value: weatherStore.weather?.hourly?.cloudcover[currentHour.value] + ' %',
+			},
+			{
+				title: 'Visibility',
+				value: weatherStore.weather?.hourly?.visibility[currentHour.value] + ' m',
+			},
+			{
+				title: 'Windspeed',
+				value: weatherStore.weather?.hourly?.windspeed_10m[currentHour.value] + ' m/s',
+			},
+			{
+				title: 'Winddirection',
+				value: weatherStore.weather?.hourly?.winddirection_10m[currentHour.value] + ' °',
+			},
+			{
+				title: 'Windgusts',
+				value: weatherStore.weather?.hourly?.windgusts_10m[currentHour.value] + ' m/s',
+			},
+		];
+	});
 </script>
 
 <template>
 	<div class="details">
 		<div class="detail__item" v-for="(detail, index) in details" :key="index">
 			<div class="content">
-				<div class="content__title">{{ detail.title }}</div>
-				<div class="content__description">{{ detail.description }}</div>
-				<div class="content__value">{{ detail.value }}</div>
+				<div class="content__title">{{ detail?.title }}</div>
+				<div class="content__description">{{ detail?.description }}</div>
+				<div class="content__value">{{ detail?.value }}</div>
 			</div>
-			<div class="icon">
-				<img :src="'/icons/' + detail.icon + '.svg'" alt="">
+			<div class="icon" v-if="detail?.icon">
+				<img :src="'/icons/' + detail?.icon + '.svg'" alt="">
 			</div>
 		</div>
 	</div>
