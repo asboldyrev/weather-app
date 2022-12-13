@@ -1,113 +1,73 @@
 <script setup>
-import { reactive, ref } from "@vue/reactivity";
+	import { ref } from "@vue/reactivity";
+	import dayjs from "../use/dayjs";
+	import { useForecastStore } from "../stores/forecast";
+import { computed } from "vue-demi";
+
+	const forecastStore = useForecastStore();
+
 	let currentForecast = ref(0);
 
 	function selectForecast(index) {
-		currentForecast.value = index;
+		currentForecast.value = index - 1;
 	}
 
-	let items = reactive([
-		{
-			date: 'Today',
-			icon: 'cloudy',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			},
-			details: [
-				{
-					name: 'Wind',
-					value: '3.75 m/s NE'
-				},
-				{
-					name: 'Pressure',
-					value: '1005 hPa'
-				},
-				{
-					name: 'Humidity',
-					value: '47 %'
-				},
-				{
-					name: 'UV index',
-					value: '5.6'
-				},
-			]
-		},
-		{
-			date: 'Mon',
-			icon: 'clear-day',
-			temperature: {
-				min: '3°',
-				max: '12°'
+	const days = computed(() => {
+		return forecastStore.forecast.daily?.time.length;
+	});
+
+	function date (index) {
+		return dayjs(forecastStore.getDailyValue('time', index - 1), "YYYY-MM-DD").format('DD.MM')
+	}
+
+	function icon(index) {
+		const code = forecastStore.getDailyValue('weathercode', index - 1);
+
+		return forecastStore.getIcon(code);
+	}
+
+	function temperatureMax(index) {
+		return Math.round(forecastStore.getDailyValue('temperature_2m_max', index - 1));
+	}
+
+	function temperatureMin(index) {
+		return Math.round(forecastStore.getDailyValue('temperature_2m_min', index - 1));
+	}
+
+	const details = computed(() => {
+		let details = [];
+		const exclude = ['time', 'weathercode', 'shortwave_radiation_sum'];
+		const skipUnit = ['sunrise', 'sunset'];
+
+		for(name in forecastStore.forecast?.daily) {
+			if(exclude.indexOf(name) == -1) {
+				details.push({
+					name: name,
+					value: forecastStore.getDailyValue(name, currentForecast.value) + (skipUnit.indexOf(name) == -1 ? (' ' + forecastStore.getDailyUnit(name)) : '')
+				});
 			}
-		},
-		{
-			date: 'Tue',
-			icon: 'overcast-day-rain',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			}
-		},
-		{
-			date: 'Wed',
-			icon: 'thunderstorms-rain',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			}
-		},
-		{
-			date: 'Thu',
-			icon: 'partly-cloudy-day-fog',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			}
-		},
-		{
-			date: 'Fri',
-			icon: 'cloudy',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			}
-		},
-		{
-			date: 'Sat',
-			icon: 'cloudy',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			}
-		},
-		{
-			date: 'Sun',
-			icon: 'cloudy',
-			temperature: {
-				min: '3°',
-				max: '12°'
-			}
-		},
-	])
+		}
+
+		return details;
+	});
 </script>
 
 <template>
 	<div class="forecast">
 		<div class="forecast__items">
-			<div class="forecast__item" :class="{ 'active': currentForecast == index }" v-for="(item, index) in items" :key="index" @click="selectForecast(index)">
-				<div class="item__date">{{ item.date }}</div>
+			<div class="forecast__item" :class="{ 'active': currentForecast == (index-1) }" v-for="index in days" @click="selectForecast(index)">
+				<div class="item__date">{{ date(index) }}</div>
 				<div class="item__icon">
-					<img :src="'/icons/colored-fill/' + item.icon + '.svg'" alt="">
+					<img :src="'/icons/colored-fill/' + icon(index)?.day + '.svg'" alt="">
 				</div>
 				<div class="item__temperature">
-					<span  class="item__temperature-max">{{ item.temperature.max }}</span>/<span class="item__temperature-min">{{ item.temperature.min }}</span>
+					<span  class="item__temperature-max">{{ temperatureMax(index) }}</span>/<span class="item__temperature-min">{{ temperatureMin(index) }}</span>
 				</div>
 			</div>
 		</div>
 
 		<div class="forecast__detail">
-			<div class="forecast__detail__item" v-for="(detailItem, detailIndex) in items[currentForecast].details" :key="detailIndex">
+			<div class="forecast__detail__item" v-for="(detailItem, detailIndex) in details" :key="detailIndex">
 				<div class="forecast__detail__item__name">{{ detailItem.name }}</div>
 				<div class="forecast__detail__item__value">{{ detailItem.value }}</div>
 			</div>
