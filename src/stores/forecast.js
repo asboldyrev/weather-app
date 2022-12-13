@@ -5,7 +5,7 @@ import { dailyProperties, hourlyProperties } from "../use/openMeteoProperties";
 import { useCityStore } from './city'
 import { useSettingsStore } from './settings'
 
-export const useWeatherStore = defineStore('weather', () => {
+export const useForecastStore = defineStore('forecast', () => {
 	const cityStore = useCityStore();
 	const settingsStore = useSettingsStore();
 
@@ -14,12 +14,11 @@ export const useWeatherStore = defineStore('weather', () => {
 		longitude: cityStore.city.longitude,
 		timezone: settingsStore.timezone,
 		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
-		end_date: settingsStore.currentDate.format('YYYY-MM-DD'),
-		hourly: hourlyProperties(),
-		//daily: dailyProperties(),
+		end_date: settingsStore.currentDate.add(10, 'day').format('YYYY-MM-DD'),
+		daily: dailyProperties(),
 	});
 
-	let _weather = ref({});
+	let _forecast = ref({});
 	let icons = ref({});
 
 	fetch('/icons.json')
@@ -28,7 +27,7 @@ export const useWeatherStore = defineStore('weather', () => {
 			icons.value = response;
 		});
 
-	async function updateWeather() {
+	async function update() {
 		if (cityStore.getCityField('latitude')) {
 			params.latitude = cityStore.getCityField('latitude');
 			params.longitude = cityStore.getCityField('longitude');
@@ -37,7 +36,7 @@ export const useWeatherStore = defineStore('weather', () => {
 			await fetch(decodeURIComponent(`https://api.open-meteo.com/v1/forecast?${new URLSearchParams(params).toString()}`))
 				.then(response => response.json())
 				.then(response => {
-					_weather.value = response;
+					_forecast.value = response;
 				});
 		}
 	}
@@ -46,27 +45,27 @@ export const useWeatherStore = defineStore('weather', () => {
 		return icons.value[code] || undefined;
 	}
 
-	function getHourlyValue(name) {
-		if (weather.value?.hourly) {
-			return weather.value?.hourly[name][settingsStore.currentHour];
+	function getDailyValue(name, day) {
+		if (_forecast.value?.daily) {
+			return _forecast.value?.daily[name][day];
 		}
 	}
 
-	function getHourlyUnit(name) {
-		if (weather.value?.hourly_units) {
-			return weather.value?.hourly_units[name];
+	function getDailyUnit(name) {
+		if (_forecast.value?.daily_units) {
+			return _forecast.value?.daily_units[name];
 		}
 	}
 
-	const weather = computed(() => {
-		return _weather.value;
+	const forecast = computed(() => {
+		return _forecast.value;
 	});
 
 	return {
-		updateWeather,
+		update,
 		getIcon,
-		getHourlyValue,
-		getHourlyUnit,
-		weather,
+		getDailyValue,
+		getDailyUnit,
+		forecast,
 	}
 })
