@@ -7,6 +7,4 @@ dayjs.locale(ruLocale);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default () => {
-	return dayjs();
-}
+export default dayjs;
