@@ -13,6 +13,8 @@ export const useWeatherStore = defineStore('weather', () => {
 		latitude: cityStore.city.latitude,
 		longitude: cityStore.city.longitude,
 		timezone: settingsStore.timezone,
+		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
+		end_date: settingsStore.currentDate.format('YYYY-MM-DD'),
 		hourly: hourlyProperties(),
 		daily: dailyProperties(),
 	});
@@ -44,6 +46,18 @@ export const useWeatherStore = defineStore('weather', () => {
 		return icons.value[code] || undefined;
 	}
 
+	function getHourlyValue(name) {
+		if (weather.value?.hourly) {
+			return weather.value?.hourly[name][settingsStore.currentHour];
+		}
+	}
+
+	function getHourlyUnit(name) {
+		if (weather.value?.hourly_units) {
+			return weather.value?.hourly_units[name];
+		}
+	}
+
 	const weather = computed(() => {
 		return _weather.value;
 	});
@@ -51,6 +65,8 @@ export const useWeatherStore = defineStore('weather', () => {
 	return {
 		updateWeather,
 		getIcon,
+		getHourlyValue,
+		getHourlyUnit,
 		weather,
 	}
 })
