@@ -1,11 +1,13 @@
 <script setup>
 	import { ref } from "@vue/reactivity";
 	import { watch } from "@vue/runtime-core";
+	import { useAirQualityStore } from "../stores/airQuality";
 	import { useCityStore } from '../stores/city'
-import { useWeatherStore } from "../stores/weather";
+	import { useWeatherStore } from "../stores/weather";
 
 	let storeCity = useCityStore();
 	let storeWeather = useWeatherStore();
+	let storeQuality = useAirQualityStore();
 
 	let cities = ref([]);
 	let search = ref('');
@@ -35,6 +37,7 @@ import { useWeatherStore } from "../stores/weather";
 	function selectCity(index) {
 		storeCity.setCity(cities.value[index]);
 		storeWeather.updateWeather();
+		storeQuality.update();
 		cities.value = [];
 		search.value = '';
 	}
