@@ -1,6 +1,7 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useCityStore } from './city';
+import dayjs from '../use/dayjs';
 
 export const useSettingsStore = defineStore('settings', () => {
 	const savedSettings = JSON.parse(localStorage.getItem('settings'));
@@ -31,9 +32,23 @@ export const useSettingsStore = defineStore('settings', () => {
 		}
 	});
 
+	const currentHour = computed(() => {
+		return currentDate.value.hour()
+	});
+
+	const currentDate = computed(() => {
+		if (timezone.value) {
+			return dayjs().tz(timezone.value);
+		} else {
+			return dayjs();
+		}
+	});
+
 	return {
 		setTimezoneMode,
 		timezoneMode,
 		timezone,
+		currentHour,
+		currentDate
 	}
 })
