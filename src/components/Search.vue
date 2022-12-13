@@ -3,11 +3,13 @@
 	import { watch } from "@vue/runtime-core";
 	import { useAirQualityStore } from "../stores/airQuality";
 	import { useCityStore } from '../stores/city'
+	import { useForecastStore } from "../stores/forecast";
 	import { useWeatherStore } from "../stores/weather";
 
 	let storeCity = useCityStore();
 	let storeWeather = useWeatherStore();
 	let storeQuality = useAirQualityStore();
+	let storeForecast = useForecastStore();
 
 	let cities = ref([]);
 	let search = ref('');
@@ -38,6 +40,7 @@
 		storeCity.setCity(cities.value[index]);
 		storeWeather.updateWeather();
 		storeQuality.update();
+		storeForecast.update();
 		cities.value = [];
 		search.value = '';
 	}

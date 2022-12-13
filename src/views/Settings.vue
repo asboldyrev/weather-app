@@ -4,6 +4,7 @@
 	import Search from '../components/Search.vue'
 	import { useAirQualityStore } from '../stores/airQuality';
 	import { useCityStore } from '../stores/city'
+	import { useForecastStore } from '../stores/forecast';
 	import { useSettingsStore } from '../stores/settings'
 	import { useWeatherStore } from '../stores/weather';
 
@@ -11,11 +12,13 @@
 	let settingsStore = useSettingsStore();
 	let weatherStore = useWeatherStore()
 	let qualityStore = useAirQualityStore();
+	let forecastStore = useForecastStore();
 
 	function setTimezone(event) {
 		settingsStore.setTimezoneMode(event.target.checked);
 		weatherStore.updateWeather();
 		qualityStore.update();
+		forecastStore.update();
 	}
 </script>
 
