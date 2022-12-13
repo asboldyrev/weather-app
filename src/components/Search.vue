@@ -6,10 +6,10 @@
 	import { useForecastStore } from "../stores/forecast";
 	import { useWeatherStore } from "../stores/weather";
 
-	let storeCity = useCityStore();
-	let storeWeather = useWeatherStore();
-	let storeQuality = useAirQualityStore();
-	let storeForecast = useForecastStore();
+	let cityStore = useCityStore();
+	let weatherStore = useWeatherStore();
+	let qualityStore = useAirQualityStore();
+	let forecastStore = useForecastStore();
 
 	let cities = ref([]);
 	let search = ref('');
@@ -37,10 +37,10 @@
 	}
 
 	function selectCity(index) {
-		storeCity.setCity(cities.value[index]);
-		storeWeather.updateWeather();
-		storeQuality.update();
-		storeForecast.update();
+		cityStore.setCity(cities.value[index]);
+		weatherStore.updateWeather();
+		qualityStore.update();
+		forecastStore.update();
 		cities.value = [];
 		search.value = '';
 	}
