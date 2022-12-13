@@ -13,6 +13,8 @@ export const useAirQualityStore = defineStore('airQuality', () => {
 		latitude: cityStore.city.latitude,
 		longitude: cityStore.city.longitude,
 		timezone: settingsStore.timezone,
+		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
+		end_date: settingsStore.currentDate.format('YYYY-MM-DD'),
 		hourly: airQuality(),
 	});
 
