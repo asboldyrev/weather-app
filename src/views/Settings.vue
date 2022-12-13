@@ -2,6 +2,7 @@
 	import { ref, watch } from 'vue-demi';
 	import About from '../components/About.vue'
 	import Search from '../components/Search.vue'
+	import { useAirQualityStore } from '../stores/airQuality';
 	import { useCityStore } from '../stores/city'
 	import { useSettingsStore } from '../stores/settings'
 	import { useWeatherStore } from '../stores/weather';
@@ -9,10 +10,12 @@
 	let cityStore = useCityStore();
 	let settingsStore = useSettingsStore();
 	let weatherStore = useWeatherStore()
+	let qualityStore = useAirQualityStore();
 
 	function setTimezone(event) {
 		settingsStore.setTimezoneMode(event.target.checked);
 		weatherStore.updateWeather();
+		qualityStore.update();
 	}
 </script>
 

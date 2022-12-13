@@ -3,11 +3,16 @@
 	import { RouterView } from 'vue-router'
 
 	import { useWeatherStore } from './stores/weather'
+	import { useAirQualityStore } from './stores/airQuality'
 	import { onBeforeMount } from 'vue';
 
-	let store = useWeatherStore();
+	let weatherStore = useWeatherStore();
+	let qualityStore = useAirQualityStore();
 
-	onBeforeMount(store.updateWeather);
+	onBeforeMount(() => {
+		weatherStore.updateWeather();
+		qualityStore.update();
+	});
 </script>
 
 <template>
