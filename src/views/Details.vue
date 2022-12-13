@@ -33,55 +33,55 @@
 
 			{
 				title: 'Humidity',
-				value: weatherStore.weather?.hourly?.relativehumidity_2m[currentHour.value] + ' %',
+				value: weatherStore.weather?.hourly?.relativehumidity_2m[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.relativehumidity_2m,
 			},
 			{
 				title: 'Dew point',
-				value: weatherStore.weather?.hourly?.dewpoint_2m[currentHour.value] + ' °',
+				value: weatherStore.weather?.hourly?.dewpoint_2m[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.dewpoint_2m,
 			},
 			{
 				title: 'Apparent temperature',
-				value: weatherStore.weather?.hourly?.apparent_temperature[currentHour.value] + ' °',
+				value: weatherStore.weather?.hourly?.apparent_temperature[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.apparent_temperature,
 			},
 			{
 				title: 'Precipitation',
-				value: weatherStore.weather?.hourly?.precipitation[currentHour.value] + ' mm',
+				value: weatherStore.weather?.hourly?.precipitation[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.precipitation,
 			},
 			{
 				title: 'Rain',
-				value: weatherStore.weather?.hourly?.rain[currentHour.value] + ' mm',
+				value: weatherStore.weather?.hourly?.rain[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.rain,
 			},
 			{
 				title: 'Showers',
-				value: weatherStore.weather?.hourly?.showers[currentHour.value] + ' mm',
+				value: weatherStore.weather?.hourly?.showers[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.showers,
 			},
 			{
 				title: 'Snowfall',
-				value: weatherStore.weather?.hourly?.snowfall[currentHour.value] + ' mm',
+				value: weatherStore.weather?.hourly?.snowfall[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.snowfall,
 			},
 			{
 				title: 'Pressure',
-				value: weatherStore.weather?.hourly?.surface_pressure[currentHour.value] + ' hPa',
+				value: weatherStore.weather?.hourly?.surface_pressure[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.surface_pressure,
 			},
 			{
 				title: 'Cloudcover',
-				value: weatherStore.weather?.hourly?.cloudcover[currentHour.value] + ' %',
+				value: weatherStore.weather?.hourly?.cloudcover[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.cloudcover,
 			},
 			{
 				title: 'Visibility',
-				value: weatherStore.weather?.hourly?.visibility[currentHour.value] + ' m',
+				value: weatherStore.weather?.hourly?.visibility[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.visibility,
 			},
 			{
 				title: 'Windspeed',
-				value: weatherStore.weather?.hourly?.windspeed_10m[currentHour.value] + ' m/s',
+				value: weatherStore.weather?.hourly?.windspeed_10m[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.windspeed_10m,
 			},
 			{
 				title: 'Winddirection',
-				value: weatherStore.weather?.hourly?.winddirection_10m[currentHour.value] + ' °',
+				value: weatherStore.weather?.hourly?.winddirection_10m[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.winddirection_10m,
 			},
 			{
 				title: 'Windgusts',
-				value: weatherStore.weather?.hourly?.windgusts_10m[currentHour.value] + ' m/s',
+				value: weatherStore.weather?.hourly?.windgusts_10m[currentHour.value] + ' ' + weatherStore.weather?.hourly_units?.windgusts_10m,
 			},
 		];
 	});
