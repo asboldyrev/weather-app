@@ -13,9 +13,7 @@ import { useWeatherStore } from "../stores/weather";
 	watch(search, newValue => {
 		if (newValue.length > 3) {
 			fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${search.value}&language=ru`)
-				.then(response => {
-					return response.json();
-				})
+				.then(response => response.json())
 				.then(data => {
 					cities.value = [];
 
@@ -30,11 +28,11 @@ import { useWeatherStore } from "../stores/weather";
 		}
 	});
 
-	const clearSearch = () => {
+	function clearSearch() {
 		search.value = '';
 	}
 
-	const selectCity = (index) => {
+	function selectCity(index) {
 		storeCity.setCity(cities.value[index]);
 		storeWeather.updateWeather();
 		cities.value = [];

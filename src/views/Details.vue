@@ -103,11 +103,6 @@
 </template>
 
 <style lang="scss" scoped>
-.details {
-	display: block;
-	padding-bottom: 85rem;
-}
-
 .detail__item {
 	position: relative;
 	display: grid;
@@ -143,6 +138,4 @@
 		margin-right: -8rem;
 	}
 }
-
-
 </style>

@@ -3,11 +3,11 @@
 
 	let openedAbout = ref(false);
 
-	const showAbout = () => {
+	function showAbout() {
 		openedAbout.value = true;
 	}
 
-	const closeAbout = () => {
+	function closeAbout() {
 		openedAbout.value = false;
 	}
 </script>
@@ -75,7 +75,7 @@
 		&__footer {
 			text-align: center;
 			border-top: 1px solid var(--comment);;
-			padding: 10rem 20rem;
+			padding: 12rem 20rem;
 
 			a {
 				text-decoration: none;

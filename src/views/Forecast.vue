@@ -2,7 +2,7 @@
 import { reactive, ref } from "@vue/reactivity";
 	let currentForecast = ref(0);
 
-	let selectForecast = (index) => {
+	function selectForecast(index) {
 		currentForecast.value = index;
 	}
 

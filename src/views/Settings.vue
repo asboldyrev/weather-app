@@ -10,44 +10,46 @@
 	let settingsStore = useSettingsStore();
 	let weatherStore = useWeatherStore()
 
-	const setTimezone = (event) => {
+	function setTimezone(event) {
 		settingsStore.setTimezoneMode(event.target.checked);
 		weatherStore.updateWeather();
 	}
 </script>
 
 <template>
-	<div class="search">
-		<Search />
-	</div>
-
 	<div class="settings">
-		<div class="settings__item">
-			<div class="settings__item_name">Current City</div>
-			<div class="settings__item_value" v-if="cityStore.city?.id">
-				{{ cityStore.city?.name }} ({{ cityStore.city?.country }})
-			</div>
+		<div class="search">
+			<Search />
 		</div>
-		<div class="settings__item" :class="{ disabled: !cityStore.getCityField('timezone') }">
-			<div class="settings__item_name">Timezone</div>
-			<div class="settings__item_value">
-				<div class="timezone">
-					<span class="timezone__label_before">City</span>
-					<input
-						type="checkbox"
-						class="timezone__input"
-						@click="setTimezone"
-						:checked="settingsStore.timezoneMode"
-						:disabled="!cityStore.getCityField('timezone')"
-					>
-					<span class="timezone__label_after">Local</span>
+
+		<div class="settings">
+			<div class="settings__item">
+				<div class="settings__item_name">Current City</div>
+				<div class="settings__item_value" v-if="cityStore.city?.id">
+					{{ cityStore.city?.name }} ({{ cityStore.city?.country }})
+				</div>
+			</div>
+			<div class="settings__item" :class="{ disabled: !cityStore.getCityField('timezone') }">
+				<div class="settings__item_name">Timezone</div>
+				<div class="settings__item_value">
+					<div class="timezone">
+						<span class="timezone__label_before">City</span>
+						<input
+							type="checkbox"
+							class="timezone__input"
+							@click="setTimezone"
+							:checked="settingsStore.timezoneMode"
+							:disabled="!cityStore.getCityField('timezone')"
+						>
+						<span class="timezone__label_after">Local</span>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="about">
-		<About />
+		<div class="about">
+			<About />
+		</div>
 	</div>
 </template>
 

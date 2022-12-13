@@ -9,7 +9,7 @@
 	const weatherStore = useWeatherStore();
 	const settingsStore = useSettingsStore()
 
-	let currentHour = computed(() => {
+	const currentHour = computed(() => {
 		if(settingsStore.timezone) {
 			return dayjs().tz(settingsStore.timezone).hour();
 		} else {
@@ -17,42 +17,36 @@
 		}
 	});
 
-	const temperature = computed(() => {
-		return Math.round(weatherStore.weather?.hourly?.temperature_2m[currentHour.value]) + '°';
-	});
+	const temperature = computed(() => Math.round(weatherStore.weather?.hourly?.temperature_2m[currentHour.value]) + '°');
 
-	const time = computed(() => {
-		return dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('HH:mm');
-	});
+	const time = computed(() => dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('HH:mm'));
 
-	const date = computed(() => {
-		return dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('dd, D MMMM');
-	});
+	const date = computed(() => dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('dd, D MMMM'));
 
-	const icon = computed(() => {
-		return weatherStore.getIcon(weatherStore.weather?.hourly?.weathercode[currentHour.value]);
-	});
+	const icon = computed(() => weatherStore.getIcon(weatherStore.weather?.hourly?.weathercode[currentHour.value]));
 </script>
 
 <template>
-	<div class="header">
-		<div class="header__country">
-			<h2>{{ cityStore.getCityField('name') }}</h2>
-			<h3>{{ cityStore.getCityField('country') }}</h3>
+	<div class="current">
+		<div class="header">
+			<div class="header__country">
+				<h2>{{ cityStore.getCityField('name') }}</h2>
+				<h3>{{ cityStore.getCityField('country') }}</h3>
+			</div>
+			<div class="header__date">
+				<p class="header__date-time">{{ time }}</p>
+				<p class="header__date-date">{{ date }}</p>
+			</div>
 		</div>
-		<div class="header__date">
-			<p class="header__date-time">{{ time }}</p>
-			<p class="header__date-date">{{ date }}</p>
+
+		<div class="icon">
+			<img :src="`/icons/colored-fill/${icon?.day || 'not-available'}.svg`" alt="">
 		</div>
-	</div>
 
-	<div class="icon">
-		<img :src="`/icons/colored-fill/${icon?.day || 'not-available'}.svg`" alt="">
-	</div>
-
-	<div class="weather">
-		<div class="weather__temperarure">{{ temperature }}</div>
-		<div class="weather__name">{{ icon?.name }}</div>
+		<div class="weather">
+			<div class="weather__temperarure">{{ temperature }}</div>
+			<div class="weather__name">{{ icon?.name }}</div>
+		</div>
 	</div>
 </template>
 

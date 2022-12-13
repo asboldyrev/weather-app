@@ -53,19 +53,11 @@ svg {
 }
 
 .menu {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 75rem;
 
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-auto-columns: 1fr;
-	grid-auto-rows: 1fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	justify-items: stretch;
 	background-color: var(--current-line);
+	height: 75rem;
 
 	&__item {
 		color: var(--foreground);
@@ -78,25 +70,23 @@ svg {
 		text-align: center;
 		text-decoration: none;
 
-		.icon {
+		.icon, .text {
 			transition: 0.5s;
 		}
 
-		.text {
-			transition: 0.5s;
-		}
+		&.active {
+			.icon {
+				transform: scale(1.5) translateY(-3rem);
 
-		&.active .icon {
-			transform: scale(1.5) translateY(-3rem);
+				svg {
+					stroke: var(--orange);
+					color: var(--orange);
+				}
+			}
 
-			svg {
-				stroke: var(--orange);
+			.text {
 				color: var(--orange);
 			}
-		}
-
-		&.active .text {
-			color: var(--orange);
 		}
 	}
 }
