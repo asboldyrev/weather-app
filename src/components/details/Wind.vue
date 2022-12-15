@@ -57,11 +57,11 @@
 	});
 
 	const gust = computed(() => {
-		return weatherStore.getHourlyValue('windgusts_10m') + ' ' + weatherStore.getHourlyUnit('windgusts_10m');
+		return parseFloat(weatherStore.getHourlyValue('windgusts_10m') / 3.6).round(2) + ' m/s';
 	});
 
 	const speed = computed(() => {
-		return weatherStore.getHourlyValue('windspeed_10m') + ' ' + weatherStore.getHourlyUnit('windspeed_10m');
+		return parseFloat(weatherStore.getHourlyValue('windspeed_10m') / 3.6).round(2) + ' m/s';
 	});
 
 	const direction = computed(() => {
