@@ -3,18 +3,16 @@ import { computed, reactive, ref } from "vue";
 import { airQuality } from "../use/openMeteoProperties";
 
 import { useCityStore } from './city'
-import { useSettingsStore } from './settings'
 
 export const useAirQualityStore = defineStore('airQuality', () => {
 	const cityStore = useCityStore();
-	const settingsStore = useSettingsStore();
 
 	const params = reactive({
 		latitude: cityStore.city.latitude,
 		longitude: cityStore.city.longitude,
-		timezone: settingsStore.timezone,
-		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
-		end_date: settingsStore.currentDate.format('YYYY-MM-DD'),
+		timezone: cityStore.timezone,
+		start_date: cityStore.currentDate.format('YYYY-MM-DD'),
+		end_date: cityStore.currentDate.format('YYYY-MM-DD'),
 		hourly: airQuality(),
 	});
 
@@ -24,7 +22,7 @@ export const useAirQualityStore = defineStore('airQuality', () => {
 		if (cityStore.getCityField('latitude')) {
 			params.latitude = cityStore.getCityField('latitude');
 			params.longitude = cityStore.getCityField('longitude');
-			params.timezone = settingsStore.timezone;
+			params.timezone = cityStore.timezone;
 
 			await fetch(decodeURIComponent(`https://air-quality-api.open-meteo.com/v1/air-quality?${new URLSearchParams(params).toString()}`))
 				.then(response => response.json())
@@ -36,7 +34,7 @@ export const useAirQualityStore = defineStore('airQuality', () => {
 
 	function getHourlyValue(name) {
 		if (_quality.value?.hourly) {
-			return _quality.value?.hourly[name][settingsStore.currentHour];
+			return _quality.value?.hourly[name][cityStore.currentHour];
 		}
 	}
 

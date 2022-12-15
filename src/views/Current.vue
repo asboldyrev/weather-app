@@ -3,15 +3,13 @@
 	import dayjs from 'dayjs';
 	import { useCityStore } from '../stores/city'
 	import { useWeatherStore } from '../stores/weather';
-	import { useSettingsStore } from '../stores/settings';
 
 	const cityStore = useCityStore();
 	const weatherStore = useWeatherStore();
-	const settingsStore = useSettingsStore()
 
 	const currentHour = computed(() => {
-		if(settingsStore.timezone) {
-			return dayjs().tz(settingsStore.timezone).hour();
+		if(cityStore.timezone) {
+			return dayjs().tz(cityStore.timezone).hour();
 		} else {
 			return dayjs().hour();
 		}

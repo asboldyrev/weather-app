@@ -1,18 +1,10 @@
 <script setup>
-	import { ref, watch } from 'vue-demi';
 	import About from '../components/About.vue'
 	import Search from '../components/Search.vue'
 	import { useCityStore } from '../stores/city'
-	import { useSettingsStore } from '../stores/settings'
-	import updater from '../use/updateData'
 
 	let cityStore = useCityStore();
-	let settingsStore = useSettingsStore();
 
-	function setTimezone(event) {
-		settingsStore.setTimezoneMode(event.target.checked);
-		updater();
-	}
 </script>
 
 <template>
@@ -26,22 +18,6 @@
 				<div class="settings__item_name">Current City</div>
 				<div class="settings__item_value" v-if="cityStore.city?.id">
 					{{ cityStore.city?.name }} ({{ cityStore.city?.country }})
-				</div>
-			</div>
-			<div class="settings__item" :class="{ disabled: !cityStore.getCityField('timezone') }">
-				<div class="settings__item_name">Timezone</div>
-				<div class="settings__item_value">
-					<div class="timezone">
-						<span class="timezone__label_before">City</span>
-						<input
-							type="checkbox"
-							class="timezone__input"
-							@click="setTimezone"
-							:checked="settingsStore.timezoneMode"
-							:disabled="!cityStore.getCityField('timezone')"
-						>
-						<span class="timezone__label_after">Local</span>
-					</div>
 				</div>
 			</div>
 		</div>

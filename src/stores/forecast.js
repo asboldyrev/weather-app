@@ -3,18 +3,16 @@ import { computed, reactive, ref } from "vue";
 import { dailyForecastProperties } from "../use/openMeteoProperties";
 
 import { useCityStore } from './city'
-import { useSettingsStore } from './settings'
 
 export const useForecastStore = defineStore('forecast', () => {
 	const cityStore = useCityStore();
-	const settingsStore = useSettingsStore();
 
 	const params = reactive({
 		latitude: cityStore.city.latitude,
 		longitude: cityStore.city.longitude,
-		timezone: settingsStore.timezone,
-		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
-		end_date: settingsStore.currentDate.add(10, 'day').format('YYYY-MM-DD'),
+		timezone: cityStore.timezone,
+		start_date: cityStore.currentDate.format('YYYY-MM-DD'),
+		end_date: cityStore.currentDate.add(10, 'day').format('YYYY-MM-DD'),
 		daily: dailyForecastProperties(),
 		current_weather: true,
 	});
@@ -32,7 +30,7 @@ export const useForecastStore = defineStore('forecast', () => {
 		if (cityStore.getCityField('latitude')) {
 			params.latitude = cityStore.getCityField('latitude');
 			params.longitude = cityStore.getCityField('longitude');
-			params.timezone = settingsStore.timezone;
+			params.timezone = cityStore.timezone;
 
 			await fetch(decodeURIComponent(`https://api.open-meteo.com/v1/forecast?${new URLSearchParams(params).toString()}`))
 				.then(response => response.json())

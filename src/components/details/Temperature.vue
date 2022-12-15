@@ -1,6 +1,5 @@
 <script setup>
 	import { useWeatherStore } from '../../stores/weather';
-	import { useSettingsStore } from '../../stores/settings';
 	import Template from './Template.vue'
 	import { computed } from 'vue'
 

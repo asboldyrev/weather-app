@@ -4,18 +4,16 @@ import { computed, reactive, ref } from "vue";
 import { hourlyWeatherProperties, dailyWeatherProperties } from "../use/openMeteoProperties";
 
 import { useCityStore } from './city'
-import { useSettingsStore } from './settings'
 
 export const useWeatherStore = defineStore('weather', () => {
 	const cityStore = useCityStore();
-	const settingsStore = useSettingsStore();
 
 	const params = reactive({
 		latitude: cityStore.city.latitude,
 		longitude: cityStore.city.longitude,
-		timezone: cityStore.getCityField('timezone'),
-		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
-		end_date: settingsStore.currentDate.format('YYYY-MM-DD'),
+		timezone: cityStore.timezone,
+		start_date: cityStore.currentDate.format('YYYY-MM-DD'),
+		end_date: cityStore.currentDate.format('YYYY-MM-DD'),
 		hourly: hourlyWeatherProperties(),
 		daily: dailyWeatherProperties(),
 		current_weather: true,
@@ -50,7 +48,7 @@ export const useWeatherStore = defineStore('weather', () => {
 
 	function getHourlyValue(name) {
 		if (weather.value?.hourly) {
-			return weather.value?.hourly[name][settingsStore.currentHour];
+			return weather.value?.hourly[name][cityStore.currentHour];
 		}
 	}
 
