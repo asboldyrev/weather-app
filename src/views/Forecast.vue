@@ -2,9 +2,11 @@
 	import { ref } from "@vue/reactivity";
 	import dayjs from "../use/dayjs";
 	import { useForecastStore } from "../stores/forecast";
-import { computed } from "vue-demi";
+	import { computed } from "vue";
+	import { useCityStore } from "../stores/city";
 
 	const forecastStore = useForecastStore();
+	const cityStore = useCityStore();
 
 	let currentForecast = ref(0);
 
@@ -34,6 +36,27 @@ import { computed } from "vue-demi";
 		return Math.round(forecastStore.getDailyValue('temperature_2m_min', index - 1));
 	}
 
+	function replaceName(name) {
+		const names = {
+			apparent_temperature_max: 'Feel temperature max',
+			apparent_temperature_min: 'Feel temperature min',
+			precipitation_sum: 'Precipitation',
+			rain_sum: 'Rain',
+			shortwave_radiation_sum: 'Shortwave radiation',
+			showers_sum: 'Showers',
+			snowfall_sum: 'Snowfall',
+			sunrise: 'Sunrise',
+			sunset: 'Sunset',
+			temperature_2m_max: 'Temperature max',
+			temperature_2m_min: 'Temperature min',
+			winddirection_10m_dominant: 'Wind direction',
+			windgusts_10m_max: 'Wind gusts',
+			windspeed_10m_max: 'Wind speed',
+		};
+
+		return names[name] || '';
+	}
+
 	const details = computed(() => {
 		let details = [];
 		const exclude = ['time', 'weathercode', 'shortwave_radiation_sum'];
@@ -41,9 +64,16 @@ import { computed } from "vue-demi";
 
 		for(name in forecastStore.forecast?.daily) {
 			if(exclude.indexOf(name) == -1) {
+				const unit = ' ' + forecastStore.getDailyUnit(name);
+				let value = forecastStore.getDailyValue(name, currentForecast.value);
+
+				if(name == 'sunrise' || name == 'sunset') {
+					value = dayjs(value).tz(cityStore.timezone).format('HH:mm');
+				}
+
 				details.push({
 					name: name,
-					value: forecastStore.getDailyValue(name, currentForecast.value) + (skipUnit.indexOf(name) == -1 ? (' ' + forecastStore.getDailyUnit(name)) : '')
+					value: value + (skipUnit.indexOf(name) == -1 ? unit : '')
 				});
 			}
 		}
@@ -68,7 +98,7 @@ import { computed } from "vue-demi";
 
 		<div class="forecast__detail">
 			<div class="forecast__detail__item" v-for="(detailItem, detailIndex) in details" :key="detailIndex">
-				<div class="forecast__detail__item__name">{{ detailItem.name }}</div>
+				<div class="forecast__detail__item__name">{{ replaceName(detailItem.name) }}</div>
 				<div class="forecast__detail__item__value">{{ detailItem.value }}</div>
 			</div>
 		</div>
