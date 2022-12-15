@@ -40,7 +40,7 @@
 		</div>
 
 		<div class="icon">
-			<img :src="`/icons/colored-fill/${icon?.day || 'not-available'}.svg`" alt="">
+			<img :src="`/icons/colored-fill/${(weatherStore.isDay ? icon?.day : icon?.night) || 'not-available'}.svg`" alt="">
 		</div>
 
 		<div class="weather">
