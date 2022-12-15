@@ -30,7 +30,7 @@ export const useWeatherStore = defineStore('weather', () => {
 			icons.value = response;
 		});
 
-	async function updateWeather() {
+	async function update() {
 		if (cityStore.getCityField('latitude')) {
 			params.latitude = cityStore.getCityField('latitude');
 			params.longitude = cityStore.getCityField('longitude');
@@ -74,7 +74,7 @@ export const useWeatherStore = defineStore('weather', () => {
 	});
 
 	return {
-		updateWeather,
+		update,
 		getIcon,
 		getHourlyValue,
 		getHourlyUnit,

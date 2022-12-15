@@ -1,21 +1,10 @@
 <script setup>
 	import Menu from './components/Menu.vue'
 	import { RouterView } from 'vue-router'
-
-	import { useWeatherStore } from './stores/weather'
-	import { useAirQualityStore } from './stores/airQuality'
-	import { useForecastStore } from './stores/forecast'
 	import { onBeforeMount } from 'vue';
+	import updater from './use/updateData'
 
-	let weatherStore = useWeatherStore();
-	let qualityStore = useAirQualityStore();
-	let forecastStore = useForecastStore();
-
-	onBeforeMount(() => {
-		weatherStore.updateWeather();
-		qualityStore.update();
-		forecastStore.update();
-	});
+	onBeforeMount(updater);
 </script>
 
 <template>
