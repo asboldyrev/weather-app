@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
-import { dailyProperties, hourlyProperties } from "../use/openMeteoProperties";
+import { dailyForecastProperties } from "../use/openMeteoProperties";
 
 import { useCityStore } from './city'
 import { useSettingsStore } from './settings'
@@ -15,7 +15,8 @@ export const useForecastStore = defineStore('forecast', () => {
 		timezone: settingsStore.timezone,
 		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
 		end_date: settingsStore.currentDate.add(10, 'day').format('YYYY-MM-DD'),
-		daily: dailyProperties(),
+		daily: dailyForecastProperties(),
+		current_weather: true,
 	});
 
 	let _forecast = ref({});

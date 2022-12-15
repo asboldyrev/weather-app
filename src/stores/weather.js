@@ -1,6 +1,7 @@
+import dayjs from "../use/dayjs";
 import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
-import { dailyProperties, hourlyProperties } from "../use/openMeteoProperties";
+import { hourlyWeatherProperties, dailyWeatherProperties } from "../use/openMeteoProperties";
 
 import { useCityStore } from './city'
 import { useSettingsStore } from './settings'
@@ -12,11 +13,12 @@ export const useWeatherStore = defineStore('weather', () => {
 	const params = reactive({
 		latitude: cityStore.city.latitude,
 		longitude: cityStore.city.longitude,
-		timezone: settingsStore.timezone,
+		timezone: cityStore.getCityField('timezone'),
 		start_date: settingsStore.currentDate.format('YYYY-MM-DD'),
 		end_date: settingsStore.currentDate.format('YYYY-MM-DD'),
-		hourly: hourlyProperties(),
-		//daily: dailyProperties(),
+		hourly: hourlyWeatherProperties(),
+		daily: dailyWeatherProperties(),
+		current_weather: true,
 	});
 
 	let _weather = ref({});
@@ -32,7 +34,7 @@ export const useWeatherStore = defineStore('weather', () => {
 		if (cityStore.getCityField('latitude')) {
 			params.latitude = cityStore.getCityField('latitude');
 			params.longitude = cityStore.getCityField('longitude');
-			params.timezone = settingsStore.timezone;
+			params.timezone = cityStore.getCityField('timezone');
 
 			await fetch(decodeURIComponent(`https://api.open-meteo.com/v1/forecast?${new URLSearchParams(params).toString()}`))
 				.then(response => response.json())
@@ -62,11 +64,21 @@ export const useWeatherStore = defineStore('weather', () => {
 		return _weather.value;
 	});
 
+	const isDay = computed(() => {
+		const currentTime = dayjs(weather.value?.current_weather?.time).tz(weather.value?.timezone, true);
+		const sunriseTime = dayjs(weather.value?.daily?.sunrise[0]).tz(weather.value?.timezone, true);
+		const sunsetTime = dayjs(weather.value?.daily?.sunset[0]).tz(weather.value?.timezone, true);
+
+		return currentTime.isBetween(sunriseTime, sunsetTime);
+
+	});
+
 	return {
 		updateWeather,
 		getIcon,
 		getHourlyValue,
 		getHourlyUnit,
 		weather,
+		isDay
 	}
 })

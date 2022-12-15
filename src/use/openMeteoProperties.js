@@ -1,4 +1,4 @@
-export function hourlyProperties() {
+export function hourlyWeatherProperties() {
 	return [
 		'temperature_2m',
 		'relativehumidity_2m',
@@ -18,7 +18,27 @@ export function hourlyProperties() {
 	];
 }
 
-export function dailyProperties() {
+export function dailyWeatherProperties() {
+	return [
+		//'weathercode',
+		//'temperature_2m_max',
+		//'temperature_2m_min',
+		//'apparent_temperature_max',
+		//'apparent_temperature_min',
+		'sunrise',
+		'sunset',
+		//'precipitation_sum',
+		//'rain_sum',
+		//'showers_sum',
+		//'snowfall_sum',
+		//'windspeed_10m_max',
+		//'windgusts_10m_max',
+		//'winddirection_10m_dominant',
+		//'shortwave_radiation_sum',
+	];
+}
+
+export function dailyForecastProperties() {
 	return [
 		'weathercode',
 		'temperature_2m_max',
