@@ -9,8 +9,12 @@
 		return airQualityStore.getHourlyValue('uv_index');
 	});
 
+	const roundIndex = computed(() => {
+		return Math.round(airQualityStore.getHourlyValue('uv_index'));
+	});
+
 	const name = computed(() => {
-		const _index = airQualityStore.getHourlyValue('uv_index');
+		const _index = roundIndex.value;
 
 		if (_index <= 2) {
 			return 'Low';
@@ -34,7 +38,7 @@
 </script>
 
 <template>
-	<Template :icon="`uv-index${index ? ('-' + index) : ''}`">
+	<Template :icon="`uv-index${roundIndex ? ('-' + roundIndex) : ''}`">
 		<template #title>UV Index</template>
 		<template #description>{{ index }}</template>
 		<template #value>{{ name }}</template>
