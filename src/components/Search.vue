@@ -2,7 +2,7 @@
 	import { ref } from "@vue/reactivity";
 	import { watch } from "@vue/runtime-core";
 	import { useCityStore } from '../stores/city'
-	import updater from '../use/updateData'
+	import { updater } from '../use/update'
 
 	let cityStore = useCityStore();
 

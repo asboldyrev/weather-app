@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
 import { dailyForecastProperties } from "../use/openMeteoProperties";
-
+import { updateData } from "../use/update";
 import { useCityStore } from './city'
 
 export const useForecastStore = defineStore('forecast', () => {
@@ -27,17 +27,11 @@ export const useForecastStore = defineStore('forecast', () => {
 		});
 
 	async function update() {
-		if (cityStore.getCityField('latitude')) {
-			params.latitude = cityStore.getCityField('latitude');
-			params.longitude = cityStore.getCityField('longitude');
-			params.timezone = cityStore.timezone;
+		params.latitude = cityStore.getCityField('latitude');
+		params.longitude = cityStore.getCityField('longitude');
+		params.timezone = cityStore.timezone;
 
-			await fetch(decodeURIComponent(`https://api.open-meteo.com/v1/forecast?${new URLSearchParams(params).toString()}`))
-				.then(response => response.json())
-				.then(response => {
-					_forecast.value = response;
-				});
-		}
+		updateData('https://api.open-meteo.com/v1/forecast', params, 'forecast').then(result => _forecast.value = result);
 	}
 
 	function getIcon(code) {

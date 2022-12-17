@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
 import { airQuality } from "../use/openMeteoProperties";
-
+import { updateData } from "../use/update";
 import { useCityStore } from './city'
 
 export const useAirQualityStore = defineStore('airQuality', () => {
@@ -19,17 +19,11 @@ export const useAirQualityStore = defineStore('airQuality', () => {
 	let _quality = ref({});
 
 	async function update() {
-		if (cityStore.getCityField('latitude')) {
-			params.latitude = cityStore.getCityField('latitude');
-			params.longitude = cityStore.getCityField('longitude');
-			params.timezone = cityStore.timezone;
+		params.latitude = cityStore.getCityField('latitude');
+		params.longitude = cityStore.getCityField('longitude');
+		params.timezone = cityStore.timezone;
 
-			await fetch(decodeURIComponent(`https://air-quality-api.open-meteo.com/v1/air-quality?${new URLSearchParams(params).toString()}`))
-				.then(response => response.json())
-				.then(response => {
-					_quality.value = response;
-				});
-		}
+		updateData('https://air-quality-api.open-meteo.com/v1/air-quality', params, 'air-quality').then(result => _quality.value = result);
 	}
 
 	function getHourlyValue(name) {

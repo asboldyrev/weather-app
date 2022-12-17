@@ -2,9 +2,12 @@
 	import Menu from './components/Menu.vue'
 	import { RouterView } from 'vue-router'
 	import { onBeforeMount } from 'vue';
-	import updater from './use/updateData'
+	import { updater } from './use/update'
 
-	onBeforeMount(updater);
+	onBeforeMount(() => {
+		updater();
+		setInterval(updater, 1 * 60 * 1000);
+	});
 </script>
 
 <template>
