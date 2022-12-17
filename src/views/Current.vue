@@ -49,6 +49,10 @@
 </template>
 
 <style lang="scss" scoped>
+	.current {
+		display: grid;
+		grid-template-rows: 1fr 3fr 2fr;
+	}
 	.header {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -83,10 +87,12 @@
 	}
 
 	.icon {
-		max-height: 320rem;
+		max-height: 300rem;
+		text-align: center;
 
 		img {
-			margin-top: -50rem;
+			margin-top: -28rem;
+			max-width: 340rem;
 		}
 	}
 
