@@ -13,34 +13,34 @@
 </script>
 
 <template>
-	<a href="#" @click.prevent="showAbout()">About</a>
+	<a href="#" @click.prevent="showAbout()">{{ $t('interface.about.about') }}</a>
 
 	<div class="about-modal_backdrop" v-show="openedAbout"></div>
 	<div class="about-modal" v-show="openedAbout">
 		<div class="about-modal__body">
-			<p>Created: <a href="https://github.com/asboldyrev" target="__blank">Andrew Boldyrev</a></p>
-			<p>Source code: <a href="https://github.com/asboldyrev/weather-app" target="__blank">GitHub</a></p>
-			<p>Resources used:</p>
+			<p>{{ $t('interface.about.created') }}: <a href="https://github.com/asboldyrev" target="__blank">{{ $t('interface.about.andrew-boldyrev') }}</a></p>
+			<p>{{ $t('interface.about.source-code') }}: <a href="https://github.com/asboldyrev/weather-app" target="__blank">GitHub</a></p>
+			<p>{{ $t('interface.about.resources-used') }}:</p>
 			<ul>
 				<li>
-					<a href="https://open-meteo.com" target="__blank">Open meteo</a> — weather data
+					<a href="https://open-meteo.com" target="__blank">Open meteo</a> — {{ $t('interface.about.weather-data') }}
 				</li>
 				<li>
-					<a href="https://github.com/basmilius/weather-icons" target="__blank">Basmilius</a> — weather icons
+					<a href="https://github.com/basmilius/weather-icons" target="__blank">Basmilius</a> — {{ $t('interface.about.weather-icons') }}
 				</li>
 				<li>
-					<a href="https://draculatheme.com/" target="__blank">Dracula</a> — theme
+					<a href="https://draculatheme.com/" target="__blank">Dracula</a> — {{ $t('interface.about.theme') }}
 				</li>
 				<li>
-					<a href="https://ionic.io/ionicons" target="__blank">Ionicons</a> — system icons
+					<a href="https://ionic.io/ionicons" target="__blank">Ionicons</a> — {{ $t('interface.about.system-icons') }}
 				</li>
 				<li>
-					<a href="https://hatscripts.github.io/circle-flags" target="__blank">Hatscripts flags</a> — country flags
+					<a href="https://hatscripts.github.io/circle-flags" target="__blank">Hatscripts flags</a> — {{ $t('interface.about.country-flags') }}
 				</li>
 			</ul>
 		</div>
 		<div class="about-modal__footer">
-			<a href="#" @click.prevent="closeAbout()">Close</a>
+			<a href="#" @click.prevent="closeAbout()">{{ $t('interface.about.close') }}</a>
 		</div>
 	</div>
 </template>

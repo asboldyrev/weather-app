@@ -4,9 +4,11 @@ import { computed, reactive, ref } from "vue";
 import { hourlyWeatherProperties, dailyWeatherProperties } from "../use/openMeteoProperties";
 import { updateData } from '../use/update'
 import { useCityStore } from './city'
+import { getCurrentInstance } from 'vue'
 
 export const useWeatherStore = defineStore('weather', () => {
 	const cityStore = useCityStore();
+	const root = getCurrentInstance();
 
 	const params = reactive({
 		latitude: cityStore.city.latitude,
@@ -20,13 +22,6 @@ export const useWeatherStore = defineStore('weather', () => {
 	});
 
 	let _weather = ref({});
-	let icons = ref({});
-
-	fetch('/icons.json')
-		.then(response => response.json())
-		.then(response => {
-			icons.value = response;
-		});
 
 	async function update() {
 		params.latitude = cityStore.getCityField('latitude');
@@ -36,8 +31,8 @@ export const useWeatherStore = defineStore('weather', () => {
 		updateData('https://api.open-meteo.com/v1/forecast', params, 'weather').then(result => _weather.value = result);
 	}
 
-	function getIcon(code) {
-		return icons.value[code] || undefined;
+	function getIconCode(hour) {
+		return _weather.value?.hourly?.weathercode[hour] || undefined;
 	}
 
 	function getHourlyValue(name) {
@@ -67,7 +62,7 @@ export const useWeatherStore = defineStore('weather', () => {
 
 	return {
 		update,
-		getIcon,
+		getIconCode,
 		getHourlyValue,
 		getHourlyUnit,
 		weather,

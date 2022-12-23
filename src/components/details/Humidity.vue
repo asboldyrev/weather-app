@@ -13,7 +13,7 @@
 
 <template>
 	<Template icon="humidity">
-		<template #title>Humidity</template>
+		<template #title>{{ $t('interface.detail.humidity') }}</template>
 		<template #value>{{ humidity }}</template>
 	</Template>
 </template>

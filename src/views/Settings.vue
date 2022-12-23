@@ -2,7 +2,9 @@
 	import About from '../components/About.vue'
 	import Search from '../components/Search.vue'
 	import { useCityStore } from '../stores/city'
+	import { useI18n } from 'vue-i18n';
 
+	const { locale } = useI18n({ useScope: 'global' })
 	let cityStore = useCityStore();
 
 </script>
@@ -15,9 +17,18 @@
 
 		<div class="settings">
 			<div class="settings__item">
-				<div class="settings__item_name">Current City</div>
+				<div class="settings__item_name">{{ $t('interface.settings.current-city') }}</div>
 				<div class="settings__item_value" v-if="cityStore.city?.id">
 					{{ cityStore.city?.name }} ({{ cityStore.city?.country }})
+				</div>
+			</div>
+			<div class="settings__item">
+				<div class="settings__item_name">{{ $t('interface.settings.language') }}</div>
+				<div class="settings__item_value">
+					<select v-model="locale">
+						<option value="en">{{ $t('interface.settings.english') }}</option>
+						<option value="ru">{{ $t('interface.settings.russian') }}</option>
+					</select>
 				</div>
 			</div>
 		</div>

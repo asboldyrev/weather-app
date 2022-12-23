@@ -13,7 +13,7 @@
 
 <template>
 	<Template icon="barometer">
-		<template #title>Pressure</template>
+		<template #title>{{ $t('interface.detail.pressure') }}</template>
 		<template #value>{{ pressure }}</template>
 	</Template>
 </template>

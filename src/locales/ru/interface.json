@@ -1,0 +1,49 @@
+{
+	"menu": {
+		"current": "Погода",
+		"detail": "Подробно",
+		"forecast": "Прогноз",
+		"settings": "Настройки"
+	},
+	"detail": {
+		"humidity": "Влажность",
+		"pressure": "Давление",
+		"wind": "Ветер",
+		"gust": "Порывы",
+		"uv-index": "UV индекс"
+	},
+	"forecast": {
+		"temperature-max": "Температура макс.",
+		"temperature-min": "Температура мин.",
+		"feel-temperature-max": "Ощущается как, макс.",
+		"feel-temperature-min": "Ощущается как, мин.",
+		"sunrise": "Рассвет",
+		"sunset": "Закат",
+		"precipitation": "Осадки",
+		"rain": "Дождь",
+		"showers": "Ливень",
+		"snowfall": "Снег",
+		"wind-speed": "Скорость ветра",
+		"wind-gusts": "Порывы ветра",
+		"wind-direction": "Направление ветра"
+	},
+	"settings": {
+		"current-city": "Текущий город",
+		"language": "Язык",
+		"english": "Английский",
+		"russian": "Русский"
+	},
+	"about": {
+		"about": "О приложении",
+		"created": "Автор",
+		"andrew-boldyrev": "Андрей Болдырев",
+		"source-code": "Исходный код",
+		"resources-used": "Использованные ресурсы",
+		"weather-data": "данные погоды",
+		"weather-icons": "иконки погоды",
+		"theme": "тема",
+		"system-icons": "системные иконки",
+		"country-flags": "флаги стран",
+		"close": "Закрыть"
+	}
+}

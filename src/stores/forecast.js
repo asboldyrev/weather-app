@@ -18,13 +18,6 @@ export const useForecastStore = defineStore('forecast', () => {
 	});
 
 	let _forecast = ref({});
-	let icons = ref({});
-
-	fetch('/icons.json')
-		.then(response => response.json())
-		.then(response => {
-			icons.value = response;
-		});
 
 	async function update() {
 		params.latitude = cityStore.getCityField('latitude');
@@ -32,10 +25,6 @@ export const useForecastStore = defineStore('forecast', () => {
 		params.timezone = cityStore.timezone;
 
 		updateData('https://api.open-meteo.com/v1/forecast', params, 'forecast').then(result => _forecast.value = result);
-	}
-
-	function getIcon(code) {
-		return icons.value[code] || undefined;
 	}
 
 	function getDailyValue(name, day) {
@@ -56,7 +45,6 @@ export const useForecastStore = defineStore('forecast', () => {
 
 	return {
 		update,
-		getIcon,
 		getDailyValue,
 		getDailyUnit,
 		forecast,

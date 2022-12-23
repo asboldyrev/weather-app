@@ -2,7 +2,7 @@
 	import Menu from './components/Menu.vue'
 	import { RouterView } from 'vue-router'
 	import { onBeforeMount } from 'vue';
-	import { updater } from './use/update'
+	import { updater } from './use/update';
 
 	onBeforeMount(() => {
 		updater();

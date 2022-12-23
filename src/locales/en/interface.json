@@ -1,0 +1,49 @@
+{
+	"menu": {
+		"current": "Current",
+		"detail": "Detail",
+		"forecast": "Forecast",
+		"settings": "Settings"
+	},
+	"detail": {
+		"humidity": "Humidity",
+		"pressure": "Pressure",
+		"wind": "Wind",
+		"gust": "Gust",
+		"uv-index": "UV Index"
+	},
+	"forecast": {
+		"temperature-max": "Temperature max",
+		"temperature-min": "Temperature min",
+		"feel-temperature-max": "Feel temperature max",
+		"feel-temperature-min": "Feel temperature min",
+		"sunrise": "Sunrise",
+		"sunset": "Sunset",
+		"precipitation": "Precipitation",
+		"rain": "Rain",
+		"showers": "Showers",
+		"snowfall": "Snowfall",
+		"wind-speed": "Wind speed",
+		"wind-gusts": "Wind gusts",
+		"wind-direction": "Wind direction"
+	},
+	"settings": {
+		"current-city": "Current City",
+		"language": "Language",
+		"english": "English",
+		"russian": "Russian"
+	},
+	"about": {
+		"about": "About",
+		"created": "Created",
+		"andrew-boldyrev": "Andrew Boldyrev",
+		"source-code": "Source code",
+		"resources-used": "Resources used",
+		"weather-data": "weather data",
+		"weather-icons": "weather icons",
+		"theme": "theme",
+		"system-icons": "system icons",
+		"country-flags": "country flags",
+		"close": "Close"
+	}
+}

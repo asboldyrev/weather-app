@@ -2,6 +2,9 @@
 	import { useWeatherStore } from '../../stores/weather';
 	import Template from './Template.vue'
 	import { computed } from 'vue'
+	import { useI18n } from 'vue-i18n';
+
+	const { t } = useI18n({ useScope: 'global' })
 
 	const weatherStore = useWeatherStore();
 
@@ -36,23 +39,7 @@
 	});
 
 	const name = computed(() => {
-		const names = [
-			'Calm',
-			'Light air',
-			'Light breeze',
-			'Gentle breeze',
-			'Moderate breeze',
-			'Fresh breeze',
-			'Strong breeze',
-			'Moderate gale',
-			'Fresh gale',
-			'Strong',
-			'Storm',
-			'Violent storm',
-			'Hurricane',
-		];
-
-		return names[index.value];
+		return t(`wind.names.${index.value}`);
 	});
 
 	const gust = computed(() => {
@@ -65,7 +52,6 @@
 
 	const direction = computed(() => {
 		const degrees = weatherStore.getHourlyValue('winddirection_10m');
-		const directions = [ 'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW', ];
 		const ranges = [
 			[ 11.25, 33.75 ],
 			[ 33.75, 56.25 ],
@@ -87,10 +73,10 @@
 		const directionIndex = ranges.findIndex(range => degrees >= range[0] && degrees < range[1]);
 
 		if(directionIndex != -1) {
-			return directions[directionIndex + 1];
+			return t(`wind.directions.${directionIndex+1}`);
 		}
 
-		return directions[0];
+		return t('wind.directions.0');
 
 	});
 
@@ -98,8 +84,8 @@
 
 <template>
 	<Template :icon="`wind-beaufort-${index}`">
-		<template #title>Wind</template>
-		<template #description>{{ name }}. Gust: {{ gust }}</template>
+		<template #title>{{ $t('interface.detail.wind') }}</template>
+		<template #description>{{ name }}. {{ $t('interface.detail.gust') }}: {{ gust }}</template>
 		<template #value>{{ speed }} {{ direction }}</template>
 	</Template>
 </template>

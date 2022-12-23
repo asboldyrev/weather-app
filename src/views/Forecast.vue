@@ -4,6 +4,9 @@
 	import { useForecastStore } from "../stores/forecast";
 	import { computed } from "vue";
 	import { useCityStore } from "../stores/city";
+	import { useI18n } from 'vue-i18n';
+
+	const { t } = useI18n({ useScope: 'global' })
 
 	const forecastStore = useForecastStore();
 	const cityStore = useCityStore();
@@ -22,10 +25,10 @@
 		return dayjs(forecastStore.getDailyValue('time', index - 1), "YYYY-MM-DD").format('DD.MM')
 	}
 
-	function icon(index) {
+	function icon(index, field) {
 		const code = forecastStore.getDailyValue('weathercode', index - 1);
 
-		return forecastStore.getIcon(code);
+		return t(`icons.${code}.${field}`);
 	}
 
 	function temperatureMax(index) {
@@ -38,20 +41,19 @@
 
 	function replaceName(name) {
 		const names = {
-			apparent_temperature_max: 'Feel temperature max',
-			apparent_temperature_min: 'Feel temperature min',
-			precipitation_sum: 'Precipitation',
-			rain_sum: 'Rain',
-			shortwave_radiation_sum: 'Shortwave radiation',
-			showers_sum: 'Showers',
-			snowfall_sum: 'Snowfall',
-			sunrise: 'Sunrise',
-			sunset: 'Sunset',
-			temperature_2m_max: 'Temperature max',
-			temperature_2m_min: 'Temperature min',
-			winddirection_10m_dominant: 'Wind direction',
-			windgusts_10m_max: 'Wind gusts',
-			windspeed_10m_max: 'Wind speed',
+			apparent_temperature_max: t('interface.forecast.feel-temperature-max'),
+			apparent_temperature_min: t('interface.forecast.feel-temperature-min'),
+			precipitation_sum: t('interface.forecast.precipitation'),
+			rain_sum: t('interface.forecast.rain'),
+			showers_sum: t('interface.forecast.showers'),
+			snowfall_sum: t('interface.forecast.snowfall'),
+			sunrise: t('interface.forecast.sunrise'),
+			sunset: t('interface.forecast.sunset'),
+			temperature_2m_max: t('interface.forecast.temperature-max'),
+			temperature_2m_min: t('interface.forecast.temperature-min'),
+			winddirection_10m_dominant: t('interface.forecast.wind-direction'),
+			windgusts_10m_max: t('interface.forecast.wind-gusts'),
+			windspeed_10m_max: t('interface.forecast.wind-speed'),
 		};
 
 		return names[name] || '';
@@ -88,7 +90,7 @@
 			<div class="forecast__item" :class="{ 'active': currentForecast == (index-1) }" v-for="index in days" @click="selectForecast(index)">
 				<div class="item__date">{{ date(index) }}</div>
 				<div class="item__icon">
-					<img :src="'/icons/colored-fill/' + icon(index)?.day + '.svg'" alt="">
+					<img :src="'/icons/colored-fill/' + icon(index, 'day') + '.svg'" alt="">
 				</div>
 				<div class="item__temperature">
 					<span  class="item__temperature-max">{{ temperatureMax(index) }}</span>/<span class="item__temperature-min">{{ temperatureMin(index) }}</span>

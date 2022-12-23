@@ -3,6 +3,9 @@
 	import dayjs from 'dayjs';
 	import { useCityStore } from '../stores/city'
 	import { useWeatherStore } from '../stores/weather';
+	import { useI18n } from 'vue-i18n';
+
+	const { t } = useI18n({ useScope: 'global' })
 
 	const cityStore = useCityStore();
 	const weatherStore = useWeatherStore();
@@ -21,7 +24,13 @@
 
 	const date = computed(() => dayjs(weatherStore.weather?.hourly?.time[currentHour.value]).format('dd, D MMMM'));
 
-	const icon = computed(() => weatherStore.getIcon(weatherStore.weather?.hourly?.weathercode[currentHour.value]));
+	const icon = computed(() => {
+		const name = weatherStore.isDay ? 'day' : 'night';
+
+		return t(`icons.${weatherStore.getIconCode(currentHour.value)}.${name}`) || 'not-available';
+	});
+
+	const iconName = computed(() => t(`icons.${weatherStore.getIconCode(currentHour.value)}.name`));
 </script>
 
 <template>
@@ -38,12 +47,12 @@
 		</div>
 
 		<div class="icon">
-			<img :src="`/icons/colored-fill/${(weatherStore.isDay ? icon?.day : icon?.night) || 'not-available'}.svg`" alt="">
+			<img :src="`/icons/colored-fill/${(icon)}.svg`" alt="">
 		</div>
 
 		<div class="weather">
 			<div class="weather__temperarure">{{ temperature }}</div>
-			<div class="weather__name">{{ icon?.name }}</div>
+			<div class="weather__name" v-t="iconName"></div>
 		</div>
 	</div>
 </template>
@@ -87,7 +96,7 @@
 	}
 
 	.icon {
-		max-height: 300rem;
+		max-height: 43vh;
 		text-align: center;
 
 		img {
