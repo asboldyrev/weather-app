@@ -1,169 +1,169 @@
 {
 	"0": {
-		"name": "Clear sky",
-		"description": "Cloud development not observed or not observable",
+		"name": "Чистое небо",
+		"description": "Развитие облака не наблюдается или не наблюдается",
 		"day": "clear-day",
 		"night": "clear-night"
 	},
 	"1": {
-		"name": "Mainly clear",
-		"description": "Cloud generally dissolving or becoming less developed",
+		"name": "В основном чистый",
+		"description": "Облако в целом растворяется или становится менее развитым",
 		"day": "partly-cloudy-day",
 		"night": "partly-cloudy-night"
 	},
 	"2": {
-		"name": "Partly cloudy",
-		"description": "State of sky on the whole unchanged",
+		"name": "Переменная облачность",
+		"description": "Состояние неба в целом без изменений",
 		"day": "cloudy",
 		"night": "cloudy"
 	},
 	"3": {
-		"name": "Облачно",
-		"description": "Clouds generally forming or developing",
+		"имя": "Облачно",
+		"description": "Облака обычно формируются или развиваются",
 		"day": "overcast",
 		"night": "overcast"
 	},
 	"45": {
-		"name": "Fog",
-		"description": "Fog or ice fog, sky invisible, no appreciable change during the preceding hour",
+		"имя": "Туман",
+		"description": "Туман или ледяной туман, небо невидимо, никаких заметных изменений в течение предыдущего часа",
 		"day": "fog",
 		"night": "fog"
 	},
 	"48": {
-		"name": "Depositing rime fog",
-		"description": "Fog, depositing rime, sky visible",
+		"name": "Отложение изморози",
+		"description": "Туман, иней, небо видно",
 		"day": "fog-day",
 		"night": "fog-night"
 	},
 	"51": {
-		"name": "Light drizzle",
-		"description": "Drizzle, not freezing, continuous, slight at time of ob.",
+		"name": "Слабая морось",
+		"description": "Морось незамерзающая, непрерывная, слабая во время об.",
 		"day": "partly-cloudy-day-drizzle",
 		"night": "partly-cloudy-night-drizzle"
 	},
 	"53": {
-		"name": "Drizzle: moderate",
-		"description": "Drizzle, not freezing, continuous, moderate at time of ob.",
+		"name": "Морось: умеренная",
+		"description": "Моросящий, незамерзающий, продолжительный, умеренный во время об.",
 		"day": "drizzle",
 		"night": "drizzle"
 	},
 	"55": {
-		"name": "Drizzle: dense intensity",
-		"description": "Drizzle, not freezing, continuous, heavy at time of ob.",
+		"name": "Морось: плотная интенсивность",
+		"description": "Моросящий, незамерзающий, непрерывный, сильный во время об.",
 		"day": "overcast-drizzle",
 		"night": "overcast-drizzle"
 	},
 	"56": {
-		"name": "Freezing Drizzle: Light",
-		"description": "Drizzle, freezing, slight",
+		"name": "Ледяная морось: Легкая",
+		"description": "Моросящий, замерзающий, легкий",
 		"day": "overcast-day-sleet",
 		"night": "overcast-night-sleet"
 	},
 	"57": {
-		"name": "Freezing Drizzle: dense intensity",
-		"description": "Drizzle, freezing, moderate or heavy (dense)",
+		"name": "Ледяная морось: плотная интенсивность",
+		"description": "Моросящий, замерзающий, умеренный или сильный (плотный)",
 		"day": "overcast-sleet",
 		"night": "overcast-sleet"
 	},
 	"61": {
-		"name": "Rain: Slight",
-		"description": "Rain, not freezing, continuous, slight at time of ob.",
+		"name": "Дождь: Слабый",
+		"description": "Дождь незамерзающий, продолжительный, слабый во время об.",
 		"day": "partly-cloudy-day-rain",
 		"night": "partly-cloudy-night-rain"
 	},
 	"63": {
-		"name": "Rain: moderate",
-		"description": "Rain, not freezing, continuous, moderate at time of ob.",
+		"name": "Дождь: умеренный",
+		"description": "Дождь незамерзающий, продолжительный, умеренный в об.",
 		"day": "rain",
 		"night": "rain"
 	},
 	"65": {
-		"name": "Rain: heavy intensity",
-		"description": "Rain, not freezing, continuous, heavy at time of ob.",
+		"name": "Дождь: сильный",
+		"description": "Дождь незамерзающий, непрерывный, сильный во время об.",
 		"day": "overcast-rain",
 		"night": "overcast-rain"
 	},
 	"66": {
-		"name": "Freezing Rain: Light",
-		"description": "Rain, freezing, slight",
+		"name": "Ледяной дождь: Свет",
+		"description": "Дождь, мороз, небольшой",
 		"day": "overcast-day-sleet",
 		"night": "overcast-night-sleet"
 	},
 	"67": {
-		"name": "Freezing Rain: heavy intensity",
-		"description": "Rain, freezing, moderate or heavy",
+		"name": "Ледяной дождь: сильный",
+		"description": "Дождь, мороз, умеренный или сильный",
 		"day": "overcast-sleet",
 		"night": "overcast-sleet"
 	},
 	"71": {
-		"name": "Snow fall: Slight",
-		"description": "Continuous fall of snowflakes, slight at time of ob.",
+		"name": "Снег: Слабый",
+		"description": "Непрерывное падение снежинок, незначительное во время об.",
 		"day": "partly-cloudy-day-snow",
 		"night": "partly-cloudy-night-snow"
 	},
 	"73": {
-		"name": "Snow fall: moderate",
-		"description": "Continuous fall of snowflakes, moderate at time of ob.",
+		"name": "Снегопад: умеренный",
+		"description": "Непрерывное падение снежинок, умеренное во время об.",
 		"day": "snow",
 		"night": "snow"
 	},
 	"75": {
-		"name": "Snow fall: heavy intensity",
-		"description": "Continuous fall of snowflakes, heavy at time of ob.",
+		"name": "Снегопад: сильный",
+		"description": "Непрерывное падение снежинок, сильное во время об.",
 		"day": "overcast-snow",
 		"night": "overcast-snow"
 	},
 	"77": {
-		"name": "Snow grains",
-		"description": "Snow grains (with or without fog)",
+		"name": "Снежные зерна",
+		"description": "Снежные зерна (с туманом или без него)",
 		"day": "sleet",
 		"night": "sleet"
 	},
 	"80": {
-		"name": "Rain showers: Slight",
-		"description": "Rain shower(s), slight",
+		"name": "Дождь: Слабый",
+		"description": "Дождевой(е) ливень(и), слабый",
 		"day": "overcast-rain",
 		"night": "overcast-rain"
 	},
 	"81": {
-		"name": "Rain showers: moderate",
-		"description": "Rain shower(s), moderate or heavy",
+		"name": "Дождь: умеренный",
+		"description": "Дождевой(е) ливень(и), умеренный или сильный",
 		"day": "extreme-day-rain",
 		"night": "extreme-night-rain"
 	},
 	"82": {
-		"name": "Rain showers: violent",
-		"description": "Rain shower(s), violent",
+		"name": "Дождь: сильный",
+		"description": "Дождь(и), сильные",
 		"day": "extreme-rain",
 		"night": "extreme-rain"
 	},
 	"85": {
-		"name": "Snow showers slight",
-		"description": "Snow shower(s), slight",
+		"name": "Слабый ливень",
+		"description": "Снегопад(и), слабый",
 		"day": "extreme-day-snow",
 		"night": "extreme-night-snow"
 	},
 	"86": {
-		"name": "Snow showers heavy",
-		"description": "Snow shower(s), moderate or heavy",
+		"name": "Сильный ливневый снег",
+		"description": "Снегопад(и), умеренный или сильный",
 		"day": "extreme-snow",
 		"night": "extreme-snow"
 	},
 	"95": {
-		"name": "Thunderstorm: Slight or moderate",
-		"description": "Thunderstorm, slight or moderate, without hail, but with rain and/or snow at time of observation",
+		"name": "Гроза: Слабая или умеренная",
+		"description": "Гроза слабая или умеренная, без града, но с дождем и/или снегом в момент наблюдения",
 		"day": "thunderstorms-day-rain",
 		"night": "thunderstorms-night-rain"
 	},
 	"96": {
-		"name": "Thunderstorm with slight hail",
-		"description": "Thunderstorm, slight or moderate, with hail at time of ob.",
+		"name": "Гроза с небольшим градом",
+		"description": "Гроза слабая или умеренная с градом во время об.",
 		"day": "thunderstorms-rain",
 		"night": "thunderstorms-rain"
 	},
 	"99": {
-		"name": "Thunderstorm with heavy hail",
-		"description": "Thunderstorm, heavy with hail at time of observation",
+		"name": "Гроза с сильным градом",
+		"description": "Гроза, сильный град в момент наблюдения",
 		"day": "thunderstorms-extreme-rain",
 		"night": "thunderstorms-extreme-rain"
 	}
